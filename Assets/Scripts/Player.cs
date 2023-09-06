@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    //무기관련 배열 함수 2개 선언
+    public GameObject[] weapons;
+    public bool[] hasWeapons;
+
     //인스펙터 창에서 설정하기 위해 public 
     public float speed;
     //Input Axsis 값을 받을 전역 변수 선언
@@ -12,6 +16,7 @@ public class Player : MonoBehaviour
     float vAxis;
     bool runDown;
     bool jumpDown;
+    bool interactDown;
 
     bool canMove = true;
     bool isJump;
@@ -21,6 +26,10 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
+
+    //트리거된 아이템을 저장하기 위한 변수 선언
+    GameObject nearObject;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +62,7 @@ public class Player : MonoBehaviour
 
         runDown = Input.GetButton("Run");
         jumpDown = Input.GetButtonDown("Jump");
+        interactDown = Input.GetButtonDown("Interaction");
     }
 
     void MoveUpdate()
@@ -106,6 +116,18 @@ public class Player : MonoBehaviour
         canMove = true;
     }
 
+    void Interaction()
+    {
+        //점프나 구르기할 땐 상호작용X
+        if(interactDown && nearObject != null && isDodge == false) 
+        {
+            if(nearObject.tag == "Weapon")
+            {
+                Item item = nearObject.GetComponent<Item>();
+                int weaponIndex = item.value;
+            }
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
         //태그를 활용해 바닥에만 작동하도록
@@ -114,5 +136,18 @@ public class Player : MonoBehaviour
             isJump = false;
             animator.SetBool("isJump", false);
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.tag == "Weapon")
+            nearObject = other.gameObject;
+
+        Debug.Log(nearObject.name);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        
     }
 }
