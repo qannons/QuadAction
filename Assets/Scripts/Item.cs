@@ -5,8 +5,9 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public enum Type { Ammo, Coin, Grenade, Heart, Weapon};
+    public int id;
     public Type type;
-    public int value;
+    public int quantity;
 
     // Start is called before the first frame update
     void Start()

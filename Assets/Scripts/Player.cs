@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //무기관련 배열 함수 2개 선언
+    //플레이어가 어떤 무기를 갖고있는지
     public GameObject[] weapons;
     public bool[] hasWeapons;
 
@@ -14,14 +15,18 @@ public class Player : MonoBehaviour
     //Input Axsis 값을 받을 전역 변수 선언
     float hAxis;
     float vAxis;
-    bool runDown;
     bool jumpDown;
     bool interactDown;
 
     bool canMove = true;
+    bool isRun;
     bool isJump;
     bool isDodge;
 
+    //temp start
+    float curTime = 0;
+    Vector3 prevMoveVec;
+    //temp end
     Vector3 moveVec;
 
     Rigidbody rb;
@@ -33,6 +38,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        prevMoveVec = Vector3.zero;
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
     }
@@ -49,6 +55,7 @@ public class Player : MonoBehaviour
 
         Jump();
         Dodge();
+        Interaction();
     }
 
     void InputUpdate()
@@ -60,23 +67,74 @@ public class Player : MonoBehaviour
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
 
-        runDown = Input.GetButton("Run");
         jumpDown = Input.GetButtonDown("Jump");
         interactDown = Input.GetButtonDown("Interaction");
     }
+    bool CanRun()
+    {
+        //(-1, 0) -> (-1, 0) == o
+        //(-0.7, 0.7) -> (-1, 0) == o
+        //(0.7, 0.7) -> (-0.7, 0.7) == x
+        //(-0.7, 0.7) -> (0, -1) == o
+        if (prevMoveVec.x >= 0)
+        {
+            if(moveVec.x >= 0)
+                return true;
+            return false;
+        }
+        else if (prevMoveVec.x < 0)
+        {
+            if (moveVec.x <= 0)
+                return true;
+            return false;
+        }
 
+        if (prevMoveVec.z >= 0)
+        {
+            if (moveVec.z >= 0)
+                return true;
+            return false;
+        }
+        else if (prevMoveVec.z < 0)
+        {
+            if (moveVec.z <= 0)
+                return true;
+            return false;
+        }
+        return true;
+    }
     void MoveUpdate()
     {
+        float deltaTime = Time.deltaTime;
 
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        if(prevMoveVec != Vector3.zero && CanRun())
+        {
+            Debug.Log("true");
+            curTime += deltaTime;
+            if (curTime > 1.0f) 
+            {
+                animator.SetBool("isRun", true);
+                isRun = true;
+            }
+        }
+        else
+        {
+            Debug.Log("false");
+            curTime = 0;
+            animator.SetBool("isRun", false);
+            isRun = false;
+        }
 
-        transform.position += moveVec * speed * (runDown ? 1.5f : 1.0f) * Time.deltaTime;
+        transform.position += moveVec * speed * (isRun ? 3.5f : 1.0f) * deltaTime;
 
         //방향키 누르면 걸음
         animator.SetBool("isWalk", moveVec != Vector3.zero);
 
         //Shift 같이 누르면 달림
-        animator.SetBool("isRun", runDown);
+        //animator.SetBool("isRun", isRun);
+
+        prevMoveVec = moveVec;
     }
 
     void Jump()
@@ -124,7 +182,9 @@ public class Player : MonoBehaviour
             if(nearObject.tag == "Weapon")
             {
                 Item item = nearObject.GetComponent<Item>();
-                int weaponIndex = item.value;
+                int weaponIndex = item.id;
+                hasWeapons[weaponIndex] = true;     
+                Destroy(nearObject);
             }
         }
     }
@@ -140,14 +200,16 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "Weapon")
+        if(other.tag == "Weapon")
+        {
             nearObject = other.gameObject;
+        }
 
-        Debug.Log(nearObject.name);
+        //Debug.Log(other.tag);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        
+        nearObject = null;   
     }
 }

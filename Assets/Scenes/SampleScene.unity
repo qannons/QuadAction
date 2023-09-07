@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -811,6 +811,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2525a4c355243fc42b2d8fa996306e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hasWeapons: 000000
   speed: 10
 --- !u!136 &1578259438
 CapsuleCollider:
@@ -1181,6 +1186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon Grenade
       objectReference: {fileID: 0}
+    - target: {fileID: 2612322666597865702, guid: a36ecdafb37191f439754304f73b99d5, type: 3}
+      propertyPath: id
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2921578659723498130, guid: a36ecdafb37191f439754304f73b99d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -1234,6 +1243,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1877358464209550663, guid: 33fa0b6d91fb6a944862c4810d770350, type: 3}
+      propertyPath: id
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4283422738092622466, guid: 33fa0b6d91fb6a944862c4810d770350, type: 3}
       propertyPath: m_Name
       value: Weapon Hammer
@@ -1291,6 +1304,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5720658397523922555, guid: 8eecfd7363cbaab4488bad82ac938a6d, type: 3}
+      propertyPath: id
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5927974348950901270, guid: 8eecfd7363cbaab4488bad82ac938a6d, type: 3}
       propertyPath: m_Name
       value: Weapon SubMachineGun
@@ -1392,6 +1409,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6944642434578926020, guid: 9bd8d9bf3c032e34d91d48e7c1f084de, type: 3}
+      propertyPath: id
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1405,6 +1426,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6999563077436614363, guid: d3590466a53b4a54b989b6b5bf13050c, type: 3}
+      propertyPath: id
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 8411472441893099015, guid: d3590466a53b4a54b989b6b5bf13050c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10
@@ -1462,6 +1487,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1090709914615991166, guid: 4f6cb12b6102ca546a158feb70d3e3e3, type: 3}
+      propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5488286825545002005, guid: 4f6cb12b6102ca546a158feb70d3e3e3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
@@ -1521,7 +1550,7 @@ SceneRoots:
   - {fileID: 1923956902}
   - {fileID: 3289536369458902744}
   - {fileID: 7370217935949916720}
-  - {fileID: 1789608842278721098}
   - {fileID: 3993776014688987835}
+  - {fileID: 1789608842278721098}
   - {fileID: 6523909820752276987}
   - {fileID: 6088018980690461038}
