@@ -10,9 +10,17 @@ public class Player : MonoBehaviour
     //플레이어가 어떤 무기를 갖고있는지
     public GameObject[] weapons;
     public bool[] hasWeapons;
+    public GameObject[] granades;
 
-    //인스펙터 창에서 설정하기 위해 public 
+    public int ammo;
+    public int health = 100;
+    public int numGrenades = 0;
     public float speed;
+
+    static int maxAmmo = 200;
+    static int maxHealth = 100;
+    static int maxGrenade = 4;
+
     //Input Axsis 값을 받을 전역 변수 선언
     float hAxis;
     float vAxis;
@@ -195,6 +203,36 @@ public class Player : MonoBehaviour
         {
             isJump = false;
             animator.SetBool("isJump", false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag =="Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch(item.type)
+            {
+                case Item.Type.Ammo:
+                    ammo += item.quantity;
+                    if(ammo > maxAmmo)
+                        ammo = maxAmmo;
+                    break;
+
+                case Item.Type.Heart:
+                    health += item.quantity;
+                    if(health > maxHealth)
+                        health = maxHealth;
+                    break;
+
+                case Item.Type.Grenade:
+                    if (numGrenades >= maxGrenade)
+                        return;
+                    granades[numGrenades].SetActive(true);
+                    numGrenades += item.quantity;
+                    break;
+            }
+            Destroy(other.gameObject);
         }
     }
 
