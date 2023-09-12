@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     //무기관련 배열 함수 2개 선언
     //플레이어가 어떤 무기를 갖고있는지
-    public GameObject[] weapons;
+    public Weapon[] weapons;
     public bool[] hasWeapons;
     public GameObject[] granades;
 
@@ -24,18 +24,22 @@ public class Player : MonoBehaviour
     //Input Axsis 값을 받을 전역 변수 선언
     float hAxis;
     float vAxis;
-    bool jumpDown;
-    bool interactDown;
 
     bool canMove = true;
     bool isRun;
     bool isJump;
     bool isDodge;
     bool isSwap;
+    bool isFireReady;
 
+    bool jumpDown;
+    bool interactDown;
     bool swapDown1;
     bool swapDown2;
     bool swapDown3;
+    bool fireDown;
+
+    float fireDelay;
 
     float curTime = 0;
     Vector3 prevMoveVec;
@@ -48,7 +52,7 @@ public class Player : MonoBehaviour
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
 
-    int  equipWeaponIndex = -1;
+    Weapon equipWeapon = null;
 
     // Start is called before the first frame update
     void Start()
@@ -67,7 +71,7 @@ public class Player : MonoBehaviour
 
         //방향에 따라 회전
         transform.LookAt(moveVec + transform.position);
-
+        Attack();
         Jump();
         Dodge();
         Interaction();
@@ -78,7 +82,7 @@ public class Player : MonoBehaviour
     {
         if (canMove == false)
             return;
-
+        
         //Axis값을 정수로 반환하는 함수
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
@@ -90,7 +94,7 @@ public class Player : MonoBehaviour
         swapDown2 = Input.GetButtonDown("Swap2");
         swapDown3 = Input.GetButtonDown("Swap3");
 
-        //Debug.Log(swapDown1);
+        fireDown = Input.GetMouseButton(0);
     }
     
     void MoveUpdate()
@@ -120,11 +124,28 @@ public class Player : MonoBehaviour
         animator.SetBool("isWalk", moveVec != Vector3.zero);;
     }
 
+    void Attack()
+    {
+        if (equipWeapon == null)
+            return;
+
+        fireDelay += Time.deltaTime;
+        isFireReady = (equipWeapon.rate < fireDelay);
+
+        if (isFireReady && fireDown && isDodge == false && isSwap == false)
+        {
+            Debug.Log(isFireReady);
+            equipWeapon.Use();
+            animator.SetTrigger("doSwing");
+            fireDelay = 0;
+        }
+    }
+
     void SwapWeapon()
     {
         int weaponIndex = -1;
 
-        if (swapDown1 && hasWeapons[0])
+         if (swapDown1 && hasWeapons[0])
             weaponIndex = 0;
         else if (swapDown2 && hasWeapons[1])
             weaponIndex = 1;
@@ -133,18 +154,18 @@ public class Player : MonoBehaviour
         else
             return;
 
-        if (weaponIndex == equipWeaponIndex)
+        if (equipWeapon == weapons[weaponIndex])
             return;
 
-        if (equipWeaponIndex >= 0)
-            weapons[equipWeaponIndex].SetActive(false);
+        if(equipWeapon != null)
+            equipWeapon.gameObject.SetActive(false);
 
-        equipWeaponIndex = weaponIndex;
-        weapons[equipWeaponIndex].SetActive(true);
+        equipWeapon = weapons[weaponIndex];
+        equipWeapon.gameObject.SetActive(true);
 
         animator.SetTrigger("doSwap");
-        
     }
+
     void Jump()
     {
         if (jumpDown && moveVec == Vector3.zero && isJump == false) 
@@ -196,6 +217,7 @@ public class Player : MonoBehaviour
             }
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         //태그를 활용해 바닥에만 작동하도록
