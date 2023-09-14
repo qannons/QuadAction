@@ -30,9 +30,10 @@ public class Player : MonoBehaviour
     bool isJump;
     bool isDodge;
     bool isSwap;
-    bool isFireReady;
     bool isReload;
+    bool isFireReady;
 
+    bool isBorder;
     bool jumpDown;
     bool interactDown;
     bool swapDown1;
@@ -80,6 +81,12 @@ public class Player : MonoBehaviour
         Reload();
     }
 
+    private void FixedUpdate()
+    {
+        FreezeRotation();
+        StopToWall();
+    }
+
     void Turn()
     {
         //키보드 방향에 따라 회전
@@ -106,7 +113,7 @@ public class Player : MonoBehaviour
         if (equipWeapon == null || equipWeapon.type == Weapon.Type.Melee)
             return;
 
-        if (ammo == 0 || isJump || isSwap || isDodge || isFireReady == false)
+        if (ammo == 0 || isJump || isSwap || isDodge || isReload || isFireReady == false)
             return;
 
         animator.SetTrigger("doReload");
@@ -164,7 +171,9 @@ public class Player : MonoBehaviour
             isRun = false;
         }
         
-        transform.position += moveVec * speed * (isRun ? 2f : 1.0f) * Time.deltaTime; ;
+
+        if(isBorder == false)
+            transform.position += moveVec * speed * (isRun ? 2f : 1.0f) * Time.deltaTime; ;
 
         //방향키 누르면 걸음
         animator.SetBool("isWalk", moveVec != Vector3.zero);;
@@ -248,6 +257,10 @@ public class Player : MonoBehaviour
         canMove = true;
     }
 
+    void FreezeRotation()
+    {
+        rb.angularVelocity = Vector3.zero;
+    }
     void Interaction()
     {
         //점프나 구르기할 땐 상호작용X
@@ -263,6 +276,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    void StopToWall()
+    {
+        Debug.DrawRay(transform.position, transform.forward*2.5f, Color.green);
+        isBorder = Physics.Raycast(transform.position, moveVec, 2.5f, LayerMask.GetMask("Wall"));
+
+    }
     private void OnCollisionEnter(Collision collision)
     {
         //태그를 활용해 바닥에만 작동하도록
