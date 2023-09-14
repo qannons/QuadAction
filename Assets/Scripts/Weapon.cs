@@ -8,8 +8,16 @@ public class Weapon : MonoBehaviour
     public Type type;
     public int damage;
     public float rate;
+    public int maxAmmo;
+    public int curAmmo;
     public BoxCollider meleeArea;
     public TrailRenderer trailRenderer;
+    
+    public Transform bulletPos;
+    public GameObject bullet;
+
+    public Transform bulletCasePos;
+    public GameObject bulletCase;
 
     public void Use()
     {
@@ -17,6 +25,12 @@ public class Weapon : MonoBehaviour
         {
             StopCoroutine("Swing");
             StartCoroutine("Swing");
+        }
+        else if(type == Type.Range && curAmmo > 0)
+        {
+            StartCoroutine("Shot");
+            --curAmmo;
+
         }
     }
 
@@ -37,7 +51,24 @@ public class Weapon : MonoBehaviour
         trailRenderer.enabled = false;
 
     }
-    //Use() 메인루틴 -> Swing() 서브루틴 -> Use() 메인 루틴...
-    //코루틴의 경우
-    //Use() 메인루틴 + Swing() 코루틴 (Co-Op)
+    IEnumerator Shot()
+    {
+        //1. 총알 발사
+        GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+        Rigidbody bullletRigid = instantBullet.GetComponent<Rigidbody>();
+        //인스턴스화 된 총알에 속도 적용하기
+        bullletRigid.velocity = bulletPos.forward * 50;
+        //bullletRigid.AddForce(Vector3.down * 0.1f);
+
+        yield return null;
+        //2. 탄피 배출
+        GameObject instantCase = Instantiate(bulletCase, bulletCasePos.position, bulletCasePos.rotation);
+        Rigidbody caseRigid = instantCase.GetComponent<Rigidbody>();
+        //탄피에 랜덤화 힘 가하기
+        Vector3 caseVec = bulletCasePos.forward * Random.Range(-3, - 2) + Vector3.up * Random.Range(2, 3);
+        caseRigid.AddForce(caseVec, ForceMode.Impulse);
+        //회전하면서 나갈거임
+        caseRigid.AddTorque(Vector3.up*10, ForceMode.Impulse);
+
+    }
 }

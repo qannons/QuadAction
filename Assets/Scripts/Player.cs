@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public int health = 100;
     public int numGrenades = 0;
     public float speed;
-
+    public Camera followCamera;
     static int maxAmmo = 200;
     static int maxHealth = 100;
     static int maxGrenade = 4;
@@ -31,6 +31,7 @@ public class Player : MonoBehaviour
     bool isDodge;
     bool isSwap;
     bool isFireReady;
+    bool isReload;
 
     bool jumpDown;
     bool interactDown;
@@ -38,7 +39,7 @@ public class Player : MonoBehaviour
     bool swapDown2;
     bool swapDown3;
     bool fireDown;
-
+    bool reloadDown;
     float fireDelay;
 
     float curTime = 0;
@@ -69,15 +70,59 @@ public class Player : MonoBehaviour
 
         MoveUpdate();
 
-        //방향에 따라 회전
-        transform.LookAt(moveVec + transform.position);
+        Turn();
+
         Attack();
         Jump();
         Dodge();
         Interaction();
         SwapWeapon();
+        Reload();
     }
 
+    void Turn()
+    {
+        //키보드 방향에 따라 회전
+        transform.LookAt(moveVec + transform.position);
+
+        //마우스에 의한 회전
+        if(fireDown)
+        {
+            Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            if(Physics.Raycast(ray, out rayHit, 100)) 
+            {
+                Vector3 nextVec = rayHit.point - transform.position;
+                nextVec.y = 0f;
+                transform.LookAt(transform.position +  nextVec);
+            }
+        }
+    }
+    void Reload()
+    {
+        if (reloadDown == false)
+            return;
+
+        if (equipWeapon == null || equipWeapon.type == Weapon.Type.Melee)
+            return;
+
+        if (ammo == 0 || isJump || isSwap || isDodge || isFireReady == false)
+            return;
+
+        animator.SetTrigger("doReload");
+        isReload = true;
+        Invoke("ReloadOut", 2f);
+    }
+
+    private void ReloadOut()
+    {
+        int reloadAmmo = ammo < equipWeapon.maxAmmo ? ammo : equipWeapon.maxAmmo;
+        ammo -= reloadAmmo;
+
+        equipWeapon.curAmmo = reloadAmmo;
+        isReload = false;
+
+    }
     void InputUpdate()
     {
         if (canMove == false)
@@ -95,6 +140,7 @@ public class Player : MonoBehaviour
         swapDown3 = Input.GetButtonDown("Swap3");
 
         fireDown = Input.GetMouseButton(0);
+        reloadDown = Input.GetButtonDown("Reload");
     }
     
     void MoveUpdate()
@@ -134,9 +180,8 @@ public class Player : MonoBehaviour
 
         if (isFireReady && fireDown && isDodge == false && isSwap == false)
         {
-            Debug.Log(isFireReady);
             equipWeapon.Use();
-            animator.SetTrigger("doSwing");
+            animator.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
             fireDelay = 0;
         }
     }
