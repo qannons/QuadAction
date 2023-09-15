@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
     //플레이어가 어떤 무기를 갖고있는지
     public Weapon[] weapons;
     public bool[] hasWeapons;
-    public GameObject[] granades;
-
+    public GameObject[] grenades;
+    public GameObject grenadeObj;
     public int ammo;
     public int health = 100;
     public int numGrenades = 0;
@@ -85,6 +85,28 @@ public class Player : MonoBehaviour
     {
         FreezeRotation();
         StopToWall();
+    }
+
+    void Grenade()
+    {
+        if (numGrenades == 0)
+            return;
+
+        Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 100))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 3f;
+
+            GameObject instantGrenade = Instantiate(grenadeObj, transform.position, transform.rotation);
+            Rigidbody rbGrenade = instantGrenade.GetComponent<Rigidbody>();
+            rbGrenade.AddForce(nextVec, ForceMode.Impulse);
+            rbGrenade.AddTorque(Vector3.back*10, ForceMode.Impulse);
+        }
+
+        numGrenades--;
+        grenades[numGrenades].SetActive(false);
     }
 
     void Turn()
@@ -314,7 +336,7 @@ public class Player : MonoBehaviour
                 case Item.Type.Grenade:
                     if (numGrenades >= maxGrenade)
                         return;
-                    granades[numGrenades].SetActive(true);
+                    grenades[numGrenades].SetActive(true);
                     numGrenades += item.quantity;
                     break;
             }
