@@ -41,6 +41,9 @@ public class Player : MonoBehaviour
     bool swapDown3;
     bool fireDown;
     bool reloadDown;
+    bool grenadeDown;
+
+
     float fireDelay;
 
     float curTime = 0;
@@ -74,6 +77,7 @@ public class Player : MonoBehaviour
         Turn();
 
         Attack();
+        Grenade();
         Jump();
         Dodge();
         Interaction();
@@ -89,6 +93,9 @@ public class Player : MonoBehaviour
 
     void Grenade()
     {
+        if (grenadeDown == false)
+            return;
+
         if (numGrenades == 0)
             return;
 
@@ -170,6 +177,7 @@ public class Player : MonoBehaviour
 
         fireDown = Input.GetMouseButton(0);
         reloadDown = Input.GetButtonDown("Reload");
+        grenadeDown = Input.GetMouseButtonDown(1);
     }
     
     void MoveUpdate()

@@ -20,6 +20,12 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
+    public void HitByGrenade(Vector3 explosionPos)
+    {
+        curHealth -= 100;
+        Vector3 reactVec = transform.position - explosionPos;
+        StartCoroutine(OnDamage());
+    }
 
     private void OnTriggerEnter(Collider other)
     {
