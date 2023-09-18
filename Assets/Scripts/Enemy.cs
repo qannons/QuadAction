@@ -1,24 +1,56 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     public int maxHealth;
     public int curHealth;
+    public GameObject target;
 
+    bool isChase = true;
     bool isAlive = true;
     Rigidbody rb;
     BoxCollider boxCollider;
     Material material;
-    
+    NavMeshAgent nav; 
+    Animator animator;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         boxCollider = GetComponent<BoxCollider>();
-        material = GetComponent<MeshRenderer>().material;
+        material = GetComponentInChildren<MeshRenderer>().material;
+        nav = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+
+        animator.SetBool("isWalk", true);
+        //Invoke("ChaseStart", 2);
     }
 
+    void FreezeVelocity()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    private void FixedUpdate()
+    {
+        FreezeVelocity();
+    }
+
+    void ChaseStart()
+    {
+        animator.SetBool("isWalk", true);
+
+    }
+     
+    private void Update()
+    {
+        if (isChase)
+            nav.SetDestination(target.transform.position);
+    }
     // Update is called once per frame
     public void HitByGrenade(Vector3 explosionPos)
     {
@@ -65,8 +97,12 @@ public class Enemy : MonoBehaviour
         else
         {
             material.color = Color.gray;
-            Destroy(gameObject, 4);
             isAlive = false;
+            isChase = false;
+            nav.enabled = false;
+            animator.SetTrigger("doDie");
+
+            Destroy(gameObject, 3);
         }
 
     }

@@ -19,6 +19,10 @@ public class Weapon : MonoBehaviour
     public Transform bulletCasePos;
     public GameObject bulletCase;
 
+    public void Awake()
+    {
+        meleeArea.enabled = false;
+    }
     public void Use()
     {
         if(type == Type.Melee) 
@@ -39,16 +43,16 @@ public class Weapon : MonoBehaviour
         //yield 키워드를 여러 개 사용하여 시간 차 로직 작성 가능
 
         //1
-        yield return new WaitForSeconds(0.1f); //0.1초 대기
+        yield return new WaitForSeconds(0.4f); //0.1초 대기
         meleeArea.enabled = true;
         trailRenderer.enabled = true;
         //2
-        yield return new WaitForSeconds(0.3f); //0.1초 대기
+        yield return new WaitForSeconds(1f); //0.1초 대기
         meleeArea.enabled = false;
+        trailRenderer.enabled = false;
 
         //3
-        yield return new WaitForSeconds(0.3f); //0.1초 대기
-        trailRenderer.enabled = false;
+        //yield return new WaitForSeconds(0.1f); //0.1초 대기
 
     }
     IEnumerator Shot()

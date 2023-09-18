@@ -106,9 +106,9 @@ public class Player : MonoBehaviour
             Vector3 nextVec = rayHit.point - transform.position;
             nextVec.y = 3f;
 
-            GameObject instantGrenade = Instantiate(grenadeObj, transform.position, transform.rotation);
+            GameObject instantGrenade = Instantiate(grenadeObj, transform.position+Vector3.forward, transform.rotation);
             Rigidbody rbGrenade = instantGrenade.GetComponent<Rigidbody>();
-            rbGrenade.AddForce(nextVec, ForceMode.Impulse);
+            rbGrenade.AddForce(nextVec*2, ForceMode.Impulse);
             rbGrenade.AddTorque(Vector3.back*10, ForceMode.Impulse);
         }
 
