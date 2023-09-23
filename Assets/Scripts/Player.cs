@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     bool isSwap;
     bool isReload;
     bool isFireReady;
-
+    bool isImmune = false;
     bool isBorder;
     bool jumpDown;
     bool interactDown;
@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
 
     Rigidbody rb;
     Animator animator;
+    MeshRenderer[] meshRenderers;
 
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
@@ -65,6 +66,7 @@ public class Player : MonoBehaviour
         prevMoveVec = Vector3.zero;
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -350,6 +352,15 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
+        else if(other.gameObject.tag == "Bullet")
+        {
+            if (isImmune == false)
+            {
+                Bullet bullet = other.GetComponent<Bullet>();
+                health -= bullet.damage;
+                StartCoroutine(OnDamaged());
+            }
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -365,5 +376,18 @@ public class Player : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         nearObject = null;   
+    }
+
+    IEnumerator OnDamaged()
+    {
+        isImmune = true;
+        foreach(MeshRenderer mesh in meshRenderers) 
+            mesh.material.color = Color.red;
+        
+        yield return new WaitForSeconds(0.4f);
+
+        isImmune = false;
+        foreach (MeshRenderer mesh in meshRenderers)
+            mesh.material.color = Color.white;
     }
 }
