@@ -358,7 +358,9 @@ public class Player : MonoBehaviour
             {
                 Bullet bullet = other.GetComponent<Bullet>();
                 health -= bullet.damage;
-                StartCoroutine(OnDamaged());
+                bool isBossAttack = other.name == "Boss Melee Area";
+                
+                StartCoroutine(OnDamaged(isBossAttack));
             }
         }
     }
@@ -378,16 +380,26 @@ public class Player : MonoBehaviour
         nearObject = null;   
     }
 
-    IEnumerator OnDamaged()
+    IEnumerator OnDamaged(bool isBossAttack)
     {
         isImmune = true;
         foreach(MeshRenderer mesh in meshRenderers) 
             mesh.material.color = Color.red;
         
+        if(isBossAttack)
+        {
+            //Vector3 KnockBackPos = (transform.forward * -25);
+            //transform.position = Vector3.Lerp(transform.position, KnockBackPos, 5 * Time.deltaTime);
+            rb.AddForce(transform.forward*-25, ForceMode.Impulse);
+        }
+
         yield return new WaitForSeconds(0.4f);
 
         isImmune = false;
         foreach (MeshRenderer mesh in meshRenderers)
             mesh.material.color = Color.white;
+
+        //if(isBossAttack )
+            //rb.velocity = Vector3.zero;
     }
 }

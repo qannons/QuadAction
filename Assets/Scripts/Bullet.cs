@@ -6,7 +6,8 @@ public class Bullet : MonoBehaviour
 {
     public int damage;
     public bool isMelee;
-    private void OnCollisionEnter(Collision collision)
+    
+    public virtual void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.tag == "Floor")
         {
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isMelee == false &&  other.tag == "Enemy")
+        if (isMelee == false &&  (other.tag == "Enemy" || other.tag =="Player"))
             Destroy(gameObject);
     }
 }

@@ -5,32 +5,35 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public enum Type { A, B, C };
+    public enum Type { A, B, C, D  };
     public Type type;
     public int maxHealth;
     public int curHealth;
-    public GameObject target;
+    public Transform target;
     public BoxCollider meleeArea;
-    public GameObject bullet;
 
+    public GameObject bullet;
+    public Animator animator;
+
+   public BoxCollider boxCollider;
+    protected bool isAlive = true;
+    protected NavMeshAgent nav; 
+
+    MeshRenderer[] meshRenderers;
     bool isAttack = false;
     bool isChase = true;
-    bool isAlive = true;
     Rigidbody rb;
-    Material material;
-    NavMeshAgent nav; 
-    Animator animator;
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        //meleeArea = GetComponent<BoxCollider>();
-        material = GetComponentInChildren<MeshRenderer>().material;
+        meshRenderers = GetComponentsInChildren<MeshRenderer>();
         nav = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-
-        animator.SetBool("isWalk", true);
-        //Invoke("ChaseStart", 2);
+        boxCollider = GetComponent<BoxCollider>();
+        if(type != Type.D)
+            Invoke("ChaseStart", 2);
     }
 
     void FreezeVelocity()
@@ -49,11 +52,11 @@ public class Enemy : MonoBehaviour
 
     }
      
-    private void Update()
+    public virtual void Update()
     {
         if(nav.enabled) 
         {
-            nav.SetDestination(target.transform.position);
+            nav.SetDestination(target.position);
             nav.isStopped = !isChase;
         }
     }
@@ -66,6 +69,9 @@ public class Enemy : MonoBehaviour
 
     void Targeting()
     {
+        if (type == Type.D)
+            return;
+
         float targetRadius = 0f;
         float targetRange = 0f;
 
@@ -138,7 +144,7 @@ public class Enemy : MonoBehaviour
     {
         curHealth -= 100;
         Vector3 reactVec = transform.position - explosionPos;
-        StartCoroutine(OnDamage());
+        StartCoroutine(OnDamaged());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -154,7 +160,7 @@ public class Enemy : MonoBehaviour
             //reactVec += Vector3.back;
             rb.AddForce(Vector3.back * 5, ForceMode.Impulse);
 
-            StartCoroutine(OnDamage());
+            StartCoroutine(OnDamaged());
         }
         else if(other.tag == "Bullet")
         {
@@ -164,27 +170,35 @@ public class Enemy : MonoBehaviour
             Bullet bullet = other.GetComponent<Bullet>();
             curHealth -= bullet.damage;
             Vector3 reactVec = transform.position - other.transform.position;
-            StartCoroutine(OnDamage());
+            StartCoroutine(OnDamaged());
         }
     }
 
-    IEnumerator OnDamage()
+    IEnumerator OnDamaged()
     {
-        material.color = Color.red;
+        foreach(MeshRenderer mesh in meshRenderers) 
+            mesh.material.color = Color.yellow;
 
         yield return new WaitForSeconds(0.1f);
 
         if(curHealth > 0)
-            material.color = Color.white;
+        {
+            foreach (MeshRenderer mesh in meshRenderers)
+                mesh.material.color = Color.white;
+        }
+            
         else
         {
-            material.color = Color.gray;
+            foreach (MeshRenderer mesh in meshRenderers)
+                mesh.material.color = Color.gray;
+    
             isAlive = false;
             isChase = false;
             nav.enabled = false;
             animator.SetTrigger("doDie");
 
-            Destroy(gameObject, 3);
+            if(type != Type.D)
+                Destroy(gameObject, 3);
         }
 
     }
