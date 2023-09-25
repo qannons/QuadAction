@@ -21,7 +21,8 @@ public class Weapon : MonoBehaviour
 
     public void Awake()
     {
-        meleeArea.enabled = false;
+        if(type == Type.Melee)
+            meleeArea.enabled = false;
     }
     public void Use()
     {

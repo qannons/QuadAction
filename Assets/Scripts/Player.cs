@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     public int ammo;
     public int health = 100;
     public int numGrenades = 0;
+    public int coin = 0;
     public float speed;
     public Camera followCamera;
     static int maxAmmo = 200;
@@ -34,6 +35,8 @@ public class Player : MonoBehaviour
     bool isFireReady;
     bool isImmune = false;
     bool isBorder;
+    bool isShopping = false;
+
     bool jumpDown;
     bool interactDown;
     bool swapDown1;
@@ -77,14 +80,16 @@ public class Player : MonoBehaviour
         MoveUpdate();
 
         Turn();
-
-        Attack();
-        Grenade();
-        Jump();
-        Dodge();
-        Interaction();
-        SwapWeapon();
-        Reload();
+        if(isShopping == false)
+        {
+            Attack();
+            Grenade();
+            Jump();
+            Dodge();
+            Interaction();
+            SwapWeapon();
+            Reload();
+        }
     }
 
     private void FixedUpdate()
@@ -305,6 +310,12 @@ public class Player : MonoBehaviour
                 hasWeapons[weaponIndex] = true;     
                 Destroy(nearObject);
             }
+            else if(nearObject.tag =="Shop")
+            {
+                Shop shop = nearObject.GetComponent<Shop>();
+                shop.Enter(this);
+                isShopping = true;
+            }
         }
     }
 
@@ -367,16 +378,23 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Weapon")
+        if(other.tag == "Weapon" || other.tag == "Shop")
         {
             nearObject = other.gameObject;
         }
 
+        
         //Debug.Log(other.tag);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if(other.tag == "Shop")
+        {
+                Shop shop = nearObject.GetComponent<Shop>();
+                shop.Exit();
+                isShopping = false;
+        }
         nearObject = null;   
     }
 
