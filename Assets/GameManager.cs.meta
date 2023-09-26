@@ -3,7 +3,22 @@ guid: b4754e22dd1943f4fba50d69f58aea1e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - menuCam: {instanceID: 0}
+  - gameCam: {instanceID: 0}
+  - player: {instanceID: 0}
+  - boss: {fileID: 757251937205739147, guid: 464996873f9482a49a9e2a28b9919789, type: 3}
+  - menuPanel: {instanceID: 0}
+  - gamePanel: {instanceID: 0}
+  - maxScoretTxt: {instanceID: 0}
+  - scoreTxt: {instanceID: 0}
+  - stageTxt: {instanceID: 0}
+  - playTimeTxt: {instanceID: 0}
+  - playerHPTxt: {instanceID: 0}
+  - playerAmmoTxt: {instanceID: 0}
+  - playerCoinTxt: {instanceID: 0}
+  - bossHPGroup: {instanceID: 0}
+  - bossHPBar: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     //무기관련 배열 함수 2개 선언
     //플레이어가 어떤 무기를 갖고있는지
-    public Weapon[] weapons;
+    public  Weapon[] weapons;
     public bool[] hasWeapons;
     public GameObject[] grenades;
     public GameObject grenadeObj;
@@ -16,11 +16,14 @@ public class Player : MonoBehaviour
     public int health = 100;
     public int numGrenades = 0;
     public int coin = 0;
+    public int score;
+
     public float speed;
     public Camera followCamera;
-    static int maxAmmo = 200;
-    static int maxHealth = 100;
+    public static int maxAmmo = 200;
+    public  int maxHP = 100;
     static int maxGrenade = 4;
+    public Weapon equipWeapon = null;
 
     //Input Axsis 값을 받을 전역 변수 선언
     float hAxis;
@@ -61,7 +64,6 @@ public class Player : MonoBehaviour
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
 
-    Weapon equipWeapon = null;
 
     // Start is called before the first frame update
     void Start()
@@ -353,8 +355,8 @@ public class Player : MonoBehaviour
 
                 case Item.Type.Heart:
                     health += item.quantity;
-                    if(health > maxHealth)
-                        health = maxHealth;
+                    if(health > maxHP)
+                        health = maxHP;
                     break;
 
                 case Item.Type.Grenade:
