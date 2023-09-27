@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public int coin = 0;
     public int score;
 
+    public GameManager gameManager;
     public float speed;
     public Camera followCamera;
     public static int maxAmmo = 200;
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
     bool isImmune = false;
     bool isBorder;
     bool isShopping = false;
+    bool isDead = false;
 
     bool jumpDown;
     bool interactDown;
@@ -80,6 +82,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) return;
         InputUpdate();
 
         MoveUpdate();
@@ -422,7 +425,18 @@ public class Player : MonoBehaviour
         foreach (MeshRenderer mesh in meshRenderers)
             mesh.material.color = Color.white;
 
+        if(health <= 0)
+        {
+            OnDie();
+        }
         //if(isBossAttack )
             //rb.velocity = Vector3.zero;
+    }
+
+    void OnDie()
+    {
+        animator.SetTrigger("doDie");
+        isDead = true;
+        gameManager.GameOver();
     }
 }

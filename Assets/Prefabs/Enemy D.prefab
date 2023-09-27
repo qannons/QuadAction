@@ -102,6 +102,11 @@ MonoBehaviour:
   type: 3
   maxHealth: 200
   curHealth: 200
+  score: 0
+  coins:
+  - {fileID: 4562125427544321223, guid: 97125c34a8aa5af46a89dc60738e129c, type: 3}
+  - {fileID: 6131182236947283854, guid: 17e0f8b1d53f71e47b0b6384949ac230, type: 3}
+  - {fileID: 7448887764833460995, guid: 962dbd2ddc95cba469f0eb731a0f42d3, type: 3}
   target: {fileID: 0}
   meleeArea: {fileID: 346944851778551064}
   bullet: {fileID: 8792658894351959759, guid: 13933e31952ed1c4f83101461c109f12, type: 3}

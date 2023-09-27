@@ -9,9 +9,11 @@ public class Enemy : MonoBehaviour
     public Type type;
     public int maxHealth;
     public int curHealth;
+    public int score;
+    public GameObject[] coins;
     public Transform target;
     public BoxCollider meleeArea;
-
+    public GameManager gameManager;
     public GameObject bullet;
     public Animator animator;
 
@@ -197,8 +199,28 @@ public class Enemy : MonoBehaviour
             nav.enabled = false;
             animator.SetTrigger("doDie");
 
-            if(type != Type.D)
-                Destroy(gameObject, 3);
+            Player player = target.GetComponent<Player>();
+            player.score += score;
+            int ranCoin = Random.Range(0, 3);
+            Instantiate(coins[ranCoin], transform.position, Quaternion.identity);
+
+            switch(type)
+            {
+                case Type.A:
+                    gameManager.enemyCnt[0]++;
+                    break;
+                case Type.B:
+                    gameManager.enemyCnt[1]++;
+                    break;
+                case Type.C:
+                    gameManager.enemyCnt[2]++;
+                    break;
+                case Type.D:
+                    gameManager.enemyCnt[3]++;
+                    break;
+            }
+            //if(type != Type.D)
+            //    Destroy(gameObject, 3);
         }
 
     }

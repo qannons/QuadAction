@@ -190,9 +190,16 @@ MonoBehaviour:
   type: 1
   maxHealth: 80
   curHealth: 80
+  score: 0
+  coins:
+  - {fileID: 4562125427544321223, guid: 97125c34a8aa5af46a89dc60738e129c, type: 3}
+  - {fileID: 6131182236947283854, guid: 17e0f8b1d53f71e47b0b6384949ac230, type: 3}
+  - {fileID: 7448887764833460995, guid: 962dbd2ddc95cba469f0eb731a0f42d3, type: 3}
   target: {fileID: 0}
   meleeArea: {fileID: 3015815803203317100}
   bullet: {fileID: 0}
+  animator: {fileID: 0}
+  boxCollider: {fileID: 0}
 --- !u!1001 &9127940706472852737
 PrefabInstance:
   m_ObjectHideFlags: 0
