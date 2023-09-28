@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     public BoxCollider meleeArea;
     public GameManager gameManager;
     public GameObject bullet;
-    public Animator animator;
+    protected Animator animator;
 
    public BoxCollider boxCollider;
     protected bool isAlive = true;
@@ -26,8 +26,7 @@ public class Enemy : MonoBehaviour
     bool isChase = true;
     Rigidbody rb;
 
-
-    void Awake()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
@@ -148,6 +147,7 @@ public class Enemy : MonoBehaviour
         Vector3 reactVec = transform.position - explosionPos;
         StartCoroutine(OnDamaged());
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

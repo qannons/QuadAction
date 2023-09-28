@@ -408,6 +408,11 @@ public class Player : MonoBehaviour
 
     IEnumerator OnDamaged(bool isBossAttack)
     {
+        if(health <= 0 && isDead == false)
+        {
+            OnDie();
+        }
+
         isImmune = true;
         foreach(MeshRenderer mesh in meshRenderers) 
             mesh.material.color = Color.red;
@@ -425,10 +430,6 @@ public class Player : MonoBehaviour
         foreach (MeshRenderer mesh in meshRenderers)
             mesh.material.color = Color.white;
 
-        if(health <= 0)
-        {
-            OnDie();
-        }
         //if(isBossAttack )
             //rb.velocity = Vector3.zero;
     }

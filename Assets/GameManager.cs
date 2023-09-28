@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour
     {
         enemyList = new List<int>();
         maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+
+        if(PlayerPrefs.HasKey("MaxScore"))
+        {
+            PlayerPrefs.SetInt("MaxScore", 0);
+        }
     }
 
     // Update is called once per frame
@@ -145,7 +150,7 @@ public class GameManager : MonoBehaviour
         if(stage % 5 == 0)
         {
             enemyCnt[3]++;
-            GameObject instantEnemy = Instantiate(enemies[enemyList[3]], enemyZones[0].position, enemyZones[0].rotation);
+            GameObject instantEnemy = Instantiate(enemies[3], enemyZones[0].position, enemyZones[0].rotation);
             Enemy enemy = instantEnemy.GetComponent<Enemy>();
             enemy.target = player.transform;
             enemy.gameManager = this;

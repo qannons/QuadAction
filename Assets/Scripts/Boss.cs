@@ -14,8 +14,9 @@ public class Boss : Enemy
     Vector3 tauntVec;
     bool isLook = true;
     
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         StartCoroutine(Think());
         nav.isStopped = true;
     }
