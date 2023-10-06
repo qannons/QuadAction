@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
     void Turn()
     {
         //키보드 방향에 따라 회전
-        transform.LookAt(moveVec + transform.position);
+        //transform.LookAt(moveVec + transform.position);
 
         //마우스에 의한 회전
         if(fireDown)
@@ -199,6 +199,7 @@ public class Player : MonoBehaviour
     {
         prevMoveVec = moveVec;
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
+        moveVec = Camera.main.transform.TransformDirection(moveVec);
         //한 방향으로 이동하면 달리기 모드
         if (prevMoveVec != Vector3.zero && isDodge == false && prevMoveVec == moveVec)
         {
