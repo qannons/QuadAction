@@ -82,11 +82,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) return;
+        //if (isDead) return;
         InputUpdate();
 
         MoveUpdate();
-
+        RayCastUpdate();
         Turn();
         if(isShopping == false)
         {
@@ -98,6 +98,16 @@ public class Player : MonoBehaviour
             SwapWeapon();
             Reload();
         }
+    }
+
+    private void RayCastUpdate()
+    {
+        bool flag = Physics.Raycast(transform.position, moveVec, 5f, LayerMask.GetMask("Door"));
+        Debug.DrawRay(transform.position, transform.forward * 5f, Color.green);
+        if (flag)
+            Debug.Log("TRUE");
+        else
+            Debug.Log("FALSE");
     }
 
     private void FixedUpdate()
