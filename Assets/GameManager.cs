@@ -48,66 +48,53 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyList = new List<int>();
-        maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
+        SceneManager.U
+        //enemyList = new List<int>();
+        //maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
-        if(PlayerPrefs.HasKey("MaxScore"))
-        {
-            PlayerPrefs.SetInt("MaxScore", 0);
-        }
+        //if(PlayerPrefs.HasKey("MaxScore"))
+        //{
+        //    PlayerPrefs.SetInt("MaxScore", 0);
+        //}
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("d");
         if (isBattle)
             playTime += Time.deltaTime;
     }
 
     private void LateUpdate()
     {
-        //상단 UI
-        scoreTxt.text = string.Format("{0:n0}", player.score);
-        stageTxt.text = "STAGE " + stage;
-
-
-        int hour = (int)(playTime / 3600);
-        int minute = (int)((playTime-hour*3600) / 60);
-        int second = (int)(playTime% 60);
-
-        playTimeTxt.text = string.Format("{0:00}", hour) + ":" + string.Format("{0:00}", minute) + ":" + string.Format("{0:00}", second);
-
         //Player UI
-        playerHPTxt.text = player.health + " / " + player.maxHP;
-        playerCoinTxt.text = string.Format("{0:n0}", player.coin);
+        //playerHPTxt.text = player.health + " / " + player.maxHP;
+        //playerCoinTxt.text = string.Format("{0:n0}", player.coin);
 
-        if (player.equipWeapon == null)
-            playerAmmoTxt.text = "- / -" + player.ammo;
-        else if (player.equipWeapon.type == Weapon.Type.Melee)
-            playerAmmoTxt.text = "- / " + player.ammo;
-        else
-            playerAmmoTxt.text = player.equipWeapon.curAmmo + " / " + player.ammo;
+        //if (player.equipWeapon == null)
+        //    playerAmmoTxt.text = "- / -" + player.ammo;
+        //else if (player.equipWeapon.type == Weapon.Type.Melee)
+        //    playerAmmoTxt.text = "- / " + player.ammo;
+        //else
+        //    playerAmmoTxt.text = player.equipWeapon.curAmmo + " / " + player.ammo;
 
         //무기 UI
         //무기는 모두 들고 시작할꺼라서 비활성화했음
         //for(int i = 0; i < weaponImg.Length; i++)
         //    weaponImg[i].color = new Color(1, 1, 1, player.hasWeapons[i] ? 1 : 0);
 
-        //폭탄 이미지
-       grenadeImg.color = new Color(1, 1, 1, player.numGrenades > 0 ? 1 : 0);
-        //적 UI
-        for (int i = 0; i < enemyText.Length; i++)
-            enemyText[i].text = enemyCnt[i].ToString();
+
 
           
         //보스 UI
-        if(boss != null)
-        {
-            bossHPGroup.anchoredPosition = Vector3.down * 30;
-            bossHPBar.localScale = new Vector3((float)boss.curHealth / boss.maxHealth, 1, 1);
-        }
-        else
-            bossHPGroup.anchoredPosition = Vector3.up * 200;
+        //if(boss != null)
+        //{
+        //    bossHPGroup.anchoredPosition = Vector3.down * 30;
+        //    bossHPBar.localScale = new Vector3((float)boss.curHealth / boss.maxHealth, 1, 1);
+        //}
+        //else
+        //    bossHPGroup.anchoredPosition = Vector3.up * 200;
     }
     public void GameStart()
     {
