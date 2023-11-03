@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     public GameManager gameManager;
     public float speed;
-    public Camera followCamera;
+    //public Camera followCamera;
     public static int maxAmmo = 200;
     public  int maxHP = 100;
     static int maxGrenade = 4;
@@ -91,7 +91,7 @@ public class Player : MonoBehaviour
         if(isShopping == false)
         {
             Attack();
-            Grenade();
+            
             Jump();
             Dodge();
             Interaction();
@@ -106,30 +106,30 @@ public class Player : MonoBehaviour
         StopToWall();
     }
 
-    void Grenade()
-    {
-        if (grenadeDown == false)
-            return;
+    //void Grenade()
+    //{
+    //    if (grenadeDown == false)
+    //        return;
 
-        if (numGrenades == 0)
-            return;
+    //    if (numGrenades == 0)
+    //        return;
 
-        Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit rayHit;
-        if (Physics.Raycast(ray, out rayHit, 100))
-        {
-            Vector3 nextVec = rayHit.point - transform.position;
-            nextVec.y = 3f;
+    //    Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+    //    RaycastHit rayHit;
+    //    if (Physics.Raycast(ray, out rayHit, 100))
+    //    {
+    //        Vector3 nextVec = rayHit.point - transform.position;
+    //        nextVec.y = 3f;
 
-            GameObject instantGrenade = Instantiate(grenadeObj, transform.position+Vector3.forward, transform.rotation);
-            Rigidbody rbGrenade = instantGrenade.GetComponent<Rigidbody>();
-            rbGrenade.AddForce(nextVec*2, ForceMode.Impulse);
-            rbGrenade.AddTorque(Vector3.back*10, ForceMode.Impulse);
-        }
+    //        GameObject instantGrenade = Instantiate(grenadeObj, transform.position+Vector3.forward, transform.rotation);
+    //        Rigidbody rbGrenade = instantGrenade.GetComponent<Rigidbody>();
+    //        rbGrenade.AddForce(nextVec*2, ForceMode.Impulse);
+    //        rbGrenade.AddTorque(Vector3.back*10, ForceMode.Impulse);
+    //    }
 
-        numGrenades--;
-        grenades[numGrenades].SetActive(false);
-    }
+    //    numGrenades--;
+    //    grenades[numGrenades].SetActive(false);
+    //}
 
     void Turn()
     {
@@ -137,17 +137,17 @@ public class Player : MonoBehaviour
         //transform.LookAt(moveVec + transform.position);
 
         //마우스에 의한 회전
-        if(fireDown)
-        {
-            Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit rayHit;
-            if(Physics.Raycast(ray, out rayHit, 100)) 
-            {
-                Vector3 nextVec = rayHit.point - transform.position;
-                nextVec.y = 0f;
-                transform.LookAt(transform.position +  nextVec);
-            }
-        }
+        //if(fireDown)
+        //{
+        //    Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
+        //    RaycastHit rayHit;
+        //    if(Physics.Raycast(ray, out rayHit, 100)) 
+        //    {
+        //        Vector3 nextVec = rayHit.point - transform.position;
+        //        nextVec.y = 0f;
+        //        transform.LookAt(transform.position +  nextVec);
+        //    }
+        //}
     }
     void Reload()
     {

@@ -12,6 +12,8 @@ TagManager:
   - Bullet
   - Enemy
   - Shop
+  - Rule Tile
+  - Portal
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - Wall
   - Enemy
   - Enemy Bullet
-  - 
+  - Portal
   - 
   - 
   - 

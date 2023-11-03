@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SceneManager.U
+        //SceneManager.LoadScene("VillageScene");
         //enemyList = new List<int>();
         //maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
