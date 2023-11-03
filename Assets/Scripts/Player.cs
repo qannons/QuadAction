@@ -319,6 +319,11 @@ public class Player : MonoBehaviour
                 hasWeapons[weaponIndex] = true;     
                 Destroy(nearObject);
             }
+            else if(nearObject.tag == "Portal")
+            {
+                Debug.Log("E");
+            }
+
             else if(nearObject.tag =="Shop")
             {
                 Shop shop = nearObject.GetComponent<Shop>();
@@ -387,7 +392,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Weapon" || other.tag == "Shop")
+        if(other.tag == "Weapon" || other.tag == "Shop" || other.tag=="Portal")
         {
             nearObject = other.gameObject;
         }
