@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    string sceneName = "VillageScene";
+    public string sceneName;
     // Start is called before the first frame update
     void Start()
     {
