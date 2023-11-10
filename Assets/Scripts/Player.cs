@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -66,6 +67,10 @@ public class Player : MonoBehaviour
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -98,6 +103,7 @@ public class Player : MonoBehaviour
             SwapWeapon();
             Reload();
         }
+
     }
 
     private void FixedUpdate()
@@ -325,6 +331,10 @@ public class Player : MonoBehaviour
                 shop.Enter(this);
                 isShopping = true;
             }
+            else if(nearObject.tag == "MoveScene")
+            {
+                SceneManager.LoadScene("ItemShop");
+            }
         }
     }
 
@@ -383,17 +393,26 @@ public class Player : MonoBehaviour
                 StartCoroutine(OnDamaged(isBossAttack));
             }
         }
+        
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Weapon" || other.tag == "Shop")
+        if(other.tag == "Shop" || other.tag == "MoveScene")
         {
             nearObject = other.gameObject;
         }
 
-        
+
         //Debug.Log(other.tag);
+
+
+        if (other.gameObject.CompareTag("MoveScene"))
+        {
+            gameManager.FloatMoveSceneTxt();
+        
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
@@ -404,7 +423,12 @@ public class Player : MonoBehaviour
                 shop.Exit();
                 isShopping = false;
         }
-        nearObject = null;   
+        nearObject = null;
+
+        if (other.tag == "MoveScene")
+        {
+            gameManager.CloseMoveSceneTxt();
+        }
     }
 
     IEnumerator OnDamaged(bool isBossAttack)
@@ -441,4 +465,6 @@ public class Player : MonoBehaviour
         isDead = true;
         gameManager.GameOver();
     }
+
+
 }

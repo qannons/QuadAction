@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public Boss boss;
     public GameObject itemShop;
     public GameObject startZone;
+    public GameObject MoveSceneTxt;
 
     public Transform[] enemyZones;
     public GameObject[] enemies;
@@ -61,7 +62,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("d");
+        
         if (isBattle)
             playTime += Time.deltaTime;
     }
@@ -195,4 +196,13 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void FloatMoveSceneTxt()
+    {
+        MoveSceneTxt.SetActive(false);
+        MoveSceneTxt.SetActive(true);
+    }
+    public void CloseMoveSceneTxt()
+    {
+        MoveSceneTxt.SetActive(false);
+    }
 }

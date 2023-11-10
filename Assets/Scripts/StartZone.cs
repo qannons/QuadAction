@@ -5,10 +5,26 @@ using UnityEngine;
 public class StartZone : MonoBehaviour
 {
     public GameManager gameManager;
-    // Start is called before the first frame update
+    private Player player;
+    private Camera cam;
+
+    //private void Awake()
+    //{
+    //    player = GetComponent<Player>();
+    //    cam = GetComponent<Camera>();        
+    //}
+
     void Start()
     {
+        player = GameObject.FindObjectOfType<Player>().GetComponent<Player>();
+        cam = GetComponent<Camera>();  
+        player.transform.position = transform.position;
 
+        cam.transform.position = new Vector3(transform.position.x,
+            transform.position.y, cam.transform.position.z);
+
+        player.transform.position = this.transform.position;
+        Debug.Log("");
     }
 
     // Update is called once per frame
@@ -17,9 +33,9 @@ public class StartZone : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Player")
-            gameManager.StageStart();
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Player")
+    //        gameManager.();
+    //}
 }
