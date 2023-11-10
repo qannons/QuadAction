@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     public int numGrenades = 0;
     public int coin = 0;
     public int score;
+    public float rayDistance = 10.0f;  // Ray의 거리를 설정합니다.
 
     public GameManager gameManager;
     public float speed;
@@ -50,7 +51,7 @@ public class Player : MonoBehaviour
     bool fireDown;
     bool reloadDown;
     bool grenadeDown;
-
+    
 
     float fireDelay;
 
@@ -65,7 +66,8 @@ public class Player : MonoBehaviour
 
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
-
+    //커서가 가리키는 오브젝트를 저장하기 위한 변수 선언
+    GameObject TargetObject;
 
     // Start is called before the first frame update
     void Start()
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour
     {
         if (isDead) return;
         InputUpdate();
-
+        RaycastUpdate();
         MoveUpdate();
 
         Turn();
@@ -100,36 +102,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void RaycastUpdate()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+        RaycastHit hit;
+
+        // Ray를 발사하고, Ray가 오브젝트에 닿았는지 확인합니다.
+        // 여기서 rayDistance를 파라미터로 추가하여 Ray의 거리를 조절합니다.
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            // Ray가 오브젝트에 닿았다면, 해당 오브젝트와 상호작용 가능합니다.
+            TargetObject = hit.collider.gameObject;
+            //Debug.Log("Interact with " + hit.transform.name);
+            Debug.Log("Interact with " + TargetObject);
+        }
+    }
+
     private void FixedUpdate()
     {
         FreezeRotation();
         StopToWall();
     }
-
-    //void Grenade()
-    //{
-    //    if (grenadeDown == false)
-    //        return;
-
-    //    if (numGrenades == 0)
-    //        return;
-
-    //    Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit rayHit;
-    //    if (Physics.Raycast(ray, out rayHit, 100))
-    //    {
-    //        Vector3 nextVec = rayHit.point - transform.position;
-    //        nextVec.y = 3f;
-
-    //        GameObject instantGrenade = Instantiate(grenadeObj, transform.position+Vector3.forward, transform.rotation);
-    //        Rigidbody rbGrenade = instantGrenade.GetComponent<Rigidbody>();
-    //        rbGrenade.AddForce(nextVec*2, ForceMode.Impulse);
-    //        rbGrenade.AddTorque(Vector3.back*10, ForceMode.Impulse);
-    //    }
-
-    //    numGrenades--;
-    //    grenades[numGrenades].SetActive(false);
-    //}
 
     void Turn()
     {
