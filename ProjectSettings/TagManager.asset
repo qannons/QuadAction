@@ -14,7 +14,11 @@ TagManager:
   - Shop
   - Rule Tile
   - Portal
+<<<<<<< HEAD
   - MoveScene
+=======
+  - Hoe
+>>>>>>> cab81c4498c72665ba38e46fba4752949d7322b4
   layers:
   - Default
   - TransparentFX
