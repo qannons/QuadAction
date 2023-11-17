@@ -66,6 +66,9 @@ public class Player : MonoBehaviour
 
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
+    GameObject mapName;
+
+    public RaycastHit hit;
 
     private void Awake()
     {
@@ -104,12 +107,21 @@ public class Player : MonoBehaviour
             Reload();
         }
 
+        Raycast();
     }
 
     private void FixedUpdate()
     {
         FreezeRotation();
         StopToWall();
+    }
+
+    public void Raycast()
+    {
+        if (Physics.Raycast(transform.position, -Vector3.up, out hit))
+        {
+            //Debug.Log("Player is on: " + hit.collider.gameObject.name);
+        }
     }
 
     //void Grenade()
@@ -331,7 +343,11 @@ public class Player : MonoBehaviour
                 shop.Enter(this);
                 isShopping = true;
             }
-            else if(nearObject.tag == "MoveScene")
+            else if(nearObject.tag == "MoveScene" || hit.collider.gameObject.name == "shopTP")
+            {
+                SceneManager.LoadScene("shop");
+            }
+            else if (nearObject.tag == "MoveScene" || hit.collider.gameObject.name == "homeTP")
             {
                 SceneManager.LoadScene("ItemShop");
             }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -30137,7 +30137,7 @@ GameObject:
   - component: {fileID: 1499153929}
   - component: {fileID: 1499153930}
   m_Layer: 0
-  m_Name: Zone
+  m_Name: shopTP
   m_TagString: MoveScene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30152,8 +30152,8 @@ Transform:
   m_GameObject: {fileID: 1499153926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 57.05, y: 4.56, z: -6.85}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalPosition: {x: 57.05, y: 5.07, z: -6.85}
+  m_LocalScale: {x: 1.2, y: 1.5, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -33730,7 +33730,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 501218960617046695, guid: fc958925259a74dbd9512eda4f8ded4a, type: 3}
       propertyPath: m_Name
-      value: grass_with_soil_area
+      value: shopTP
+      objectReference: {fileID: 0}
+    - target: {fileID: 501218960617046695, guid: fc958925259a74dbd9512eda4f8ded4a, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 990650431815637021, guid: fc958925259a74dbd9512eda4f8ded4a, type: 3}
       propertyPath: m_LocalScale.x
@@ -40647,7 +40651,7 @@ PrefabInstance:
       objectReference: {fileID: 1918038567}
     - target: {fileID: 7226520944105762036, guid: 26712fab92847d9488b63c94582475dc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 95.96
+      value: 96.58
       objectReference: {fileID: 0}
     - target: {fileID: 7226520944105762036, guid: 26712fab92847d9488b63c94582475dc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -40655,7 +40659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7226520944105762036, guid: 26712fab92847d9488b63c94582475dc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.27
+      value: 1.81
       objectReference: {fileID: 0}
     - target: {fileID: 7226520944105762036, guid: 26712fab92847d9488b63c94582475dc, type: 3}
       propertyPath: m_LocalRotation.w
