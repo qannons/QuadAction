@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17335,7 +17335,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5232934739625418483, guid: f56f01b115c934b64989066fa476eca6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5384369885051364974, guid: f56f01b115c934b64989066fa476eca6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6584452157927735470, guid: f56f01b115c934b64989066fa476eca6, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111051221520091264, guid: f56f01b115c934b64989066fa476eca6, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -32596,15 +32608,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1545780392280171365, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 111.62
+      value: 104.38
       objectReference: {fileID: 0}
     - target: {fileID: 1545780392280171365, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.39
+      value: 16.05
       objectReference: {fileID: 0}
     - target: {fileID: 1545780392280171365, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.571761
+      value: 2.96
       objectReference: {fileID: 0}
     - target: {fileID: 1545780392280171365, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32655,8 +32667,16 @@ PrefabInstance:
       value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8792658894351959759, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8792658894351959759, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
       propertyPath: m_TagString
       value: Portal
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803256063704904267, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8459156664718720934, guid: 13933e31952ed1c4f83101461c109f12, type: 3}
