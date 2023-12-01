@@ -14535,16 +14535,28 @@ PrefabInstance:
       value: Book
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.012
+      value: 21.66
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.053
+      value: 3.06
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.926
+      value: 15.86
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ba19a4a4826dbb047b79f5fe26061e1b, type: 3}
       propertyPath: m_LocalRotation.w

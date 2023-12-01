@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000006, guid: 35271d8745a6f9c418608a1331961073, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -1141,75 +1141,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6101107163663203578, guid: cbc1d3b7475814f20818245d9e54aca9, type: 3}
   m_PrefabInstance: {fileID: 27484622}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &354046712
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 221.8
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8.8
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -21.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8880675
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.2547345
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.3678496
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.10551446
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 32.01
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
-      propertyPath: m_Name
-      value: red_plane_without_gear
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2c0747dfd9ee341cda818a107a4a98cb, type: 3}
 --- !u!1001 &359632856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3051,13 +2982,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 0
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 0
   m_VertexStreams: 00010304
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -12107,4 +12040,3 @@ SceneRoots:
   - {fileID: 445996514}
   - {fileID: 1282591236}
   - {fileID: 1523090172}
-  - {fileID: 354046712}
