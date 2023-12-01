@@ -47,6 +47,11 @@ public class GameManager : MonoBehaviour
     public RectTransform bossHPBar;
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        //playerCamera = GetComponentInChildren<Camera>();
+    }
     void Start()
     {
         //SceneManager.LoadScene("VillageScene");

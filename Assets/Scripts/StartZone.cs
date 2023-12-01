@@ -16,7 +16,7 @@ public class StartZone : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<Player>().GetComponent<Player>();
+        player = FindObjectOfType<Player>().GetComponent<Player>();
         cam = GetComponent<Camera>();  
         player.transform.position = transform.position;
 

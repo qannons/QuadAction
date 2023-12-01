@@ -120,7 +120,7 @@ public class Player : MonoBehaviour
     public void Raycast()
     {
         cursorObject = null;
-        gameManager.CloseMoveSceneTxt();
+        //gameManager.CloseMoveSceneTxt();
         //if (Physics.Raycast(transform.position, -Vector3.up, out hit))
         //{
         //    Debug.Log("Player is on: " + hit.collider.gameObject.name);
@@ -148,6 +148,10 @@ public class Player : MonoBehaviour
                 Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
                 fn();
                 // 여기에 추가적인 처리를 추가할 수 있습니다.
+            }
+            else
+            {
+                gameManager.CloseMoveSceneTxt();
             }
         }
     }
