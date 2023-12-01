@@ -353,22 +353,25 @@ public class Player : MonoBehaviour
     void Interaction()
     {
         //점프나 구르기할 땐 상호작용X
-        if(interactDown && (nearObject != null || cursorObject != null) && isDodge == false) 
+        if(interactDown && isDodge == false) 
         {
-            if(nearObject.tag == "Weapon")
+            if(nearObject != null)
             {
-                Item item = nearObject.GetComponent<Item>();
-                int weaponIndex = item.id;
-                hasWeapons[weaponIndex] = true;     
-                Destroy(nearObject);
+                if(nearObject.tag == "Weapon")
+                {
+                    Item item = nearObject.GetComponent<Item>();
+                    int weaponIndex = item.id;
+                    hasWeapons[weaponIndex] = true;     
+                    Destroy(nearObject);
+                }
+                else if(nearObject.tag =="Shop")
+                {
+                    Shop shop = nearObject.GetComponent<Shop>();
+                    shop.Enter(this);
+                    isShopping = true;
+                }
             }
-            else if(nearObject.tag =="Shop")
-            {
-                Shop shop = nearObject.GetComponent<Shop>();
-                shop.Enter(this);
-                isShopping = true;
-            }
-            else if(nearObject.tag == "MoveScene" || cursorObject.name == "Home2Shop")
+            if(cursorObject.name == "Home2Shop")
             {
                 SceneManager.LoadScene("shop");
             }
