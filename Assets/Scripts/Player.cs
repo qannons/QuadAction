@@ -389,6 +389,10 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("NaeBu1");
             }
+            else if (cursorObject.name == "Book")
+            {
+                
+            }
         }
     }
 
