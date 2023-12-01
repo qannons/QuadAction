@@ -118,11 +118,36 @@ public class Player : MonoBehaviour
 
     public void Raycast()
     {
-        if (Physics.Raycast(transform.position, -Vector3.up, out hit))
+        //if (Physics.Raycast(transform.position, -Vector3.up, out hit))
+        //{
+        //    Debug.Log("Player is on: " + hit.collider.gameObject.name);
+        //}
+        // 화면 중앙에 Ray를 쏘기 위해 화면의 중앙을 기준으로 Ray를 생성합니다.
+        // 화면 중앙에 Ray를 쏘기 위해 화면의 중앙을 기준으로 Ray를 생성합니다.
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+
+        // Raycast를 통해 부딪힌 물체의 정보를 저장할 변수
+        RaycastHit hitInfo;
+
+        // Ray를 쏴서 부딪힌 물체가 있는지 확인
+        if (Physics.Raycast(ray, out hitInfo))
         {
-            //Debug.Log("Player is on: " + hit.collider.gameObject.name);
+            // 부딪힌 물체에 대한 처리를 수행
+            GameObject hitObject = hitInfo.collider.gameObject;
+
+            // 부딪힌 지점까지의 거리를 확인
+            float distanceToHit = hitInfo.distance;
+
+            // 특정 거리 이상으로 이동한 경우에만 작업을 수행
+            if (distanceToHit <= 5f)
+            {
+                Debug.Log("Hit object: " + hitObject.name + ", Distance: " + distanceToHit);
+                
+                // 여기에 추가적인 처리를 추가할 수 있습니다.
+            }
         }
     }
+
 
     //void Grenade()
     //{
@@ -183,15 +208,6 @@ public class Player : MonoBehaviour
         Invoke("ReloadOut", 2f);
     }
 
-    private void ReloadOut()
-    {
-        int reloadAmmo = ammo < equipWeapon.maxAmmo ? ammo : equipWeapon.maxAmmo;
-        ammo -= reloadAmmo;
-
-        equipWeapon.curAmmo = reloadAmmo;
-        isReload = false;
-
-    }
     void InputUpdate()
     {
         if (canMove == false)
@@ -398,17 +414,6 @@ public class Player : MonoBehaviour
             }
             Destroy(other.gameObject);
         }
-        else if(other.gameObject.tag == "Bullet")
-        {
-            if (isImmune == false)
-            {
-                Bullet bullet = other.GetComponent<Bullet>();
-                health -= bullet.damage;
-                bool isBossAttack = other.name == "Boss Melee Area";
-                
-                StartCoroutine(OnDamaged(isBossAttack));
-            }
-        }
         
     }
 
@@ -446,41 +451,4 @@ public class Player : MonoBehaviour
             gameManager.CloseMoveSceneTxt();
         }
     }
-
-    IEnumerator OnDamaged(bool isBossAttack)
-    {
-        if(health <= 0 && isDead == false)
-        {
-            OnDie();
-        }
-
-        isImmune = true;
-        foreach(MeshRenderer mesh in meshRenderers) 
-            mesh.material.color = Color.red;
-        
-        if(isBossAttack)
-        {
-            //Vector3 KnockBackPos = (transform.forward * -25);
-            //transform.position = Vector3.Lerp(transform.position, KnockBackPos, 5 * Time.deltaTime);
-            rb.AddForce(transform.forward*-25, ForceMode.Impulse);
-        }
-
-        yield return new WaitForSeconds(0.4f);
-
-        isImmune = false;
-        foreach (MeshRenderer mesh in meshRenderers)
-            mesh.material.color = Color.white;
-
-        //if(isBossAttack )
-            //rb.velocity = Vector3.zero;
-    }
-
-    void OnDie()
-    {
-        animator.SetTrigger("doDie");
-        isDead = true;
-        gameManager.GameOver();
-    }
-
-
 }
