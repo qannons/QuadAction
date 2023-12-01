@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public int numGrenades = 0;
     public int coin = 0;
     public int score;
-
+    Camera playerCamera;
     public GameManager gameManager;
     public float speed;
     //public Camera followCamera;
@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this);
+        playerCamera = GetComponentInChildren<Camera>();
     }
 
     // Start is called before the first frame update
@@ -126,7 +127,8 @@ public class Player : MonoBehaviour
         //}
         // 화면 중앙에 Ray를 쏘기 위해 화면의 중앙을 기준으로 Ray를 생성합니다.
         // 화면 중앙에 Ray를 쏘기 위해 화면의 중앙을 기준으로 Ray를 생성합니다.
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        
 
         // Raycast를 통해 부딪힌 물체의 정보를 저장할 변수
         RaycastHit hitInfo;
@@ -375,9 +377,9 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("shop");
             }
-            else if (nearObject.tag == "MoveScene" || cursorObject.name == "homeTP")
+            else if (cursorObject.name == "Shop2Home")
             {
-                SceneManager.LoadScene("ItemShop");
+                SceneManager.LoadScene("FarmScene");
             }
         }
     }
