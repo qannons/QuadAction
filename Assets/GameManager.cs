@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        //SceneManager.LoadScene("VillageScene");
+        SceneManager.LoadScene("FarmScene");
         //enemyList = new List<int>();
         //maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
