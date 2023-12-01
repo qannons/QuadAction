@@ -381,6 +381,10 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("FarmScene");
             }
+            else if (cursorObject.name == "Villege2Naebu")
+            {
+                SceneManager.LoadScene("NaeBu1");
+            }
         }
     }
 
