@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    GameObject cursorObject;
     //무기관련 배열 함수 2개 선언
     //플레이어가 어떤 무기를 갖고있는지
     public  Weapon[] weapons;
@@ -94,6 +95,7 @@ public class Player : MonoBehaviour
         InputUpdate();
 
         MoveUpdate();
+        Raycast();
 
         Turn();
         if(isShopping == false)
@@ -106,8 +108,6 @@ public class Player : MonoBehaviour
             SwapWeapon();
             Reload();
         }
-
-        Raycast();
     }
 
     private void FixedUpdate()
@@ -118,6 +118,8 @@ public class Player : MonoBehaviour
 
     public void Raycast()
     {
+        cursorObject = null;
+        gameManager.CloseMoveSceneTxt();
         //if (Physics.Raycast(transform.position, -Vector3.up, out hit))
         //{
         //    Debug.Log("Player is on: " + hit.collider.gameObject.name);
@@ -132,8 +134,6 @@ public class Player : MonoBehaviour
         // Ray를 쏴서 부딪힌 물체가 있는지 확인
         if (Physics.Raycast(ray, out hitInfo))
         {
-            // 부딪힌 물체에 대한 처리를 수행
-            GameObject hitObject = hitInfo.collider.gameObject;
 
             // 부딪힌 지점까지의 거리를 확인
             float distanceToHit = hitInfo.distance;
@@ -141,13 +141,22 @@ public class Player : MonoBehaviour
             // 특정 거리 이상으로 이동한 경우에만 작업을 수행
             if (distanceToHit <= 5f)
             {
-                Debug.Log("Hit object: " + hitObject.name + ", Distance: " + distanceToHit);
-                
+                // 부딪힌 물체에 대한 처리를 수행
+                cursorObject = hitInfo.collider.gameObject;
+                Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
+                fn();
                 // 여기에 추가적인 처리를 추가할 수 있습니다.
             }
         }
     }
 
+    void fn()
+    {
+        if (cursorObject.CompareTag("MoveScene"))
+        {
+            gameManager.FloatMoveSceneTxt();
+        }
+    }
 
     //void Grenade()
     //{
@@ -344,7 +353,7 @@ public class Player : MonoBehaviour
     void Interaction()
     {
         //점프나 구르기할 땐 상호작용X
-        if(interactDown && nearObject != null && isDodge == false) 
+        if(interactDown && (nearObject != null || cursorObject != null) && isDodge == false) 
         {
             if(nearObject.tag == "Weapon")
             {
@@ -359,11 +368,11 @@ public class Player : MonoBehaviour
                 shop.Enter(this);
                 isShopping = true;
             }
-            else if(nearObject.tag == "MoveScene" || hit.collider.gameObject.name == "shopTP")
+            else if(nearObject.tag == "MoveScene" || cursorObject.name == "Home2Shop")
             {
                 SceneManager.LoadScene("shop");
             }
-            else if (nearObject.tag == "MoveScene" || hit.collider.gameObject.name == "homeTP")
+            else if (nearObject.tag == "MoveScene" || cursorObject.name == "homeTP")
             {
                 SceneManager.LoadScene("ItemShop");
             }

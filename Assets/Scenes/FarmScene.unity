@@ -31134,7 +31134,7 @@ GameObject:
   - component: {fileID: 1548452047}
   - component: {fileID: 1548452046}
   m_Layer: 0
-  m_Name: shopTP
+  m_Name: Home2Shop
   m_TagString: MoveScene
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
