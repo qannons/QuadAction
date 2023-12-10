@@ -33,4 +33,9 @@ public class Page : MonoBehaviour
             GetComponent<Image>().sprite = imageArray[index];
         }
     }
+
+    public void OnClickCloseButton()
+    {
+
+    }
 }
