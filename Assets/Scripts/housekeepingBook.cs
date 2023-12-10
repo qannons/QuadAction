@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class Shop : MonoBehaviour
+public class houseKeepingBook : MonoBehaviour
 {
     public RectTransform uiGroup;
     public Animator animator;
@@ -17,13 +17,13 @@ public class Shop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Enter(Player player)
@@ -37,12 +37,12 @@ public class Shop : MonoBehaviour
     {
         animator.SetTrigger("doHello");
         uiGroup.anchoredPosition = Vector3.down * 1000;
-    }    
+    }
 
     public void Buy(int index)
     {
         int price = itemPrices[index];
-        if(price > enterPlayer.coin)
+        if (price > enterPlayer.coin)
         {
             StopCoroutine(Talk());
             StartCoroutine(Talk());
@@ -53,7 +53,7 @@ public class Shop : MonoBehaviour
         Instantiate(itemObjects[index], itemPoses[index].position + ranVec, itemPoses[index].rotation);
     }
 
-    IEnumerator Talk() 
+    IEnumerator Talk()
     {
         talkText.text = talklDatas[1];
         yield return new WaitForSeconds(2f);

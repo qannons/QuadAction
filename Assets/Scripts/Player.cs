@@ -51,7 +51,6 @@ public class Player : MonoBehaviour
     bool swapDown3;
     bool fireDown;
     bool reloadDown;
-    bool grenadeDown;
 
 
     float fireDelay;
@@ -84,9 +83,6 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
         meshRenderers = GetComponentsInChildren<MeshRenderer>();
-
-        Debug.Log(PlayerPrefs.GetInt("MaxScore"));
-        //PlayerPrefs.SetInt("MaxScore", 0);
     }
 
     // Update is called once per frame
@@ -98,7 +94,6 @@ public class Player : MonoBehaviour
         MoveUpdate();
         Raycast();
 
-        Turn();
         if(isShopping == false)
         {
             Attack();
@@ -145,13 +140,14 @@ public class Player : MonoBehaviour
             {
                 // 부딪힌 물체에 대한 처리를 수행
                 cursorObject = hitInfo.collider.gameObject;
-                // Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
+                Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
                 fn();
                 // 여기에 추가적인 처리를 추가할 수 있습니다.
             }
             else
             {
                 gameManager.CloseMoveSceneTxt();
+                gameManager.CloseBookTxt();
             }
         }
     }
@@ -164,7 +160,7 @@ public class Player : MonoBehaviour
         }
         else if(cursorObject.CompareTag("Book"))
         {
-            gameManager.FloatMoveSceneTxt();
+            gameManager.FloatBookTxt();
         }
     }
 
@@ -193,24 +189,6 @@ public class Player : MonoBehaviour
     //    grenades[numGrenades].SetActive(false);
     //}
 
-    void Turn()
-    {
-        //키보드 방향에 따라 회전
-        //transform.LookAt(moveVec + transform.position);
-
-        //마우스에 의한 회전
-        //if(fireDown)
-        //{
-        //    Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
-        //    RaycastHit rayHit;
-        //    if(Physics.Raycast(ray, out rayHit, 100)) 
-        //    {
-        //        Vector3 nextVec = rayHit.point - transform.position;
-        //        nextVec.y = 0f;
-        //        transform.LookAt(transform.position +  nextVec);
-        //    }
-        //}
-    }
     void Reload()
     {
         if (reloadDown == false)
@@ -245,7 +223,6 @@ public class Player : MonoBehaviour
 
         fireDown = Input.GetMouseButton(0);
         reloadDown = Input.GetButtonDown("Reload");
-        grenadeDown = Input.GetMouseButtonDown(1);
     }
     
     void MoveUpdate()
