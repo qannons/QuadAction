@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     GameObject cursorObject;
-    //¹«±â°ü·Ã ¹è¿­ ÇÔ¼ö 2°³ ¼±¾ğ
-    //ÇÃ·¹ÀÌ¾î°¡ ¾î¶² ¹«±â¸¦ °®°íÀÖ´ÂÁö
+    //ë¬´ê¸°ê´€ë ¨ ë°°ì—´ í•¨ìˆ˜ 2ê°œ ì„ ì–¸
+    //í”Œë ˆì´ì–´ê°€ ì–´ë–¤ ë¬´ê¸°ë¥¼ ê°–ê³ ìˆëŠ”ì§€
     public  Weapon[] weapons;
     public bool[] hasWeapons;
     public GameObject[] grenades;
@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     static int maxGrenade = 4;
     public Weapon equipWeapon = null;
 
-    //Input Axsis °ªÀ» ¹ŞÀ» Àü¿ª º¯¼ö ¼±¾ğ
+    //Input Axsis ê°’ì„ ë°›ì„ ì „ì—­ ë³€ìˆ˜ ì„ ì–¸
     float hAxis;
     float vAxis;
 
@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     Animator animator;
     MeshRenderer[] meshRenderers;
 
-    //Æ®¸®°ÅµÈ ¾ÆÀÌÅÛÀ» ÀúÀåÇÏ±â À§ÇÑ º¯¼ö ¼±¾ğ
+    //íŠ¸ë¦¬ê±°ëœ ì•„ì´í…œì„ ì €ì¥í•˜ê¸° ìœ„í•œ ë³€ìˆ˜ ì„ ì–¸
     GameObject nearObject;
     GameObject mapName;
 
@@ -125,29 +125,29 @@ public class Player : MonoBehaviour
         //{
         //    Debug.Log("Player is on: " + hit.collider.gameObject.name);
         //}
-        // È­¸é Áß¾Ó¿¡ Ray¸¦ ½î±â À§ÇØ È­¸éÀÇ Áß¾ÓÀ» ±âÁØÀ¸·Î Ray¸¦ »ı¼ºÇÕ´Ï´Ù.
-        // È­¸é Áß¾Ó¿¡ Ray¸¦ ½î±â À§ÇØ È­¸éÀÇ Áß¾ÓÀ» ±âÁØÀ¸·Î Ray¸¦ »ı¼ºÇÕ´Ï´Ù.
+        // í™”ë©´ ì¤‘ì•™ì— Rayë¥¼ ì˜ê¸° ìœ„í•´ í™”ë©´ì˜ ì¤‘ì•™ì„ ê¸°ì¤€ìœ¼ë¡œ Rayë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
+        // í™”ë©´ ì¤‘ì•™ì— Rayë¥¼ ì˜ê¸° ìœ„í•´ í™”ë©´ì˜ ì¤‘ì•™ì„ ê¸°ì¤€ìœ¼ë¡œ Rayë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
         Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         
 
-        // Raycast¸¦ ÅëÇØ ºÎµúÈù ¹°Ã¼ÀÇ Á¤º¸¸¦ ÀúÀåÇÒ º¯¼ö
+        // Raycastë¥¼ í†µí•´ ë¶€ë”ªíŒ ë¬¼ì²´ì˜ ì •ë³´ë¥¼ ì €ì¥í•  ë³€ìˆ˜
         RaycastHit hitInfo;
 
-        // Ray¸¦ ½÷¼­ ºÎµúÈù ¹°Ã¼°¡ ÀÖ´ÂÁö È®ÀÎ
+        // Rayë¥¼ ì´ì„œ ë¶€ë”ªíŒ ë¬¼ì²´ê°€ ìˆëŠ”ì§€ í™•ì¸
         if (Physics.Raycast(ray, out hitInfo))
         {
 
-            // ºÎµúÈù ÁöÁ¡±îÁöÀÇ °Å¸®¸¦ È®ÀÎ
+            // ë¶€ë”ªíŒ ì§€ì ê¹Œì§€ì˜ ê±°ë¦¬ë¥¼ í™•ì¸
             float distanceToHit = hitInfo.distance;
 
-            // Æ¯Á¤ °Å¸® ÀÌ»óÀ¸·Î ÀÌµ¿ÇÑ °æ¿ì¿¡¸¸ ÀÛ¾÷À» ¼öÇà
+            // íŠ¹ì • ê±°ë¦¬ ì´ìƒìœ¼ë¡œ ì´ë™í•œ ê²½ìš°ì—ë§Œ ì‘ì—…ì„ ìˆ˜í–‰
             if (distanceToHit <= 5f)
             {
-                // ºÎµúÈù ¹°Ã¼¿¡ ´ëÇÑ Ã³¸®¸¦ ¼öÇà
+                // ë¶€ë”ªíŒ ë¬¼ì²´ì— ëŒ€í•œ ì²˜ë¦¬ë¥¼ ìˆ˜í–‰
                 cursorObject = hitInfo.collider.gameObject;
-                Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
+                // Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
                 fn();
-                // ¿©±â¿¡ Ãß°¡ÀûÀÎ Ã³¸®¸¦ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+                // ì—¬ê¸°ì— ì¶”ê°€ì ì¸ ì²˜ë¦¬ë¥¼ ì¶”ê°€í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.
             }
             else
             {
@@ -191,10 +191,10 @@ public class Player : MonoBehaviour
 
     void Turn()
     {
-        //Å°º¸µå ¹æÇâ¿¡ µû¶ó È¸Àü
+        //í‚¤ë³´ë“œ ë°©í–¥ì— ë”°ë¼ íšŒì „
         //transform.LookAt(moveVec + transform.position);
 
-        //¸¶¿ì½º¿¡ ÀÇÇÑ È¸Àü
+        //ë§ˆìš°ìŠ¤ì— ì˜í•œ íšŒì „
         //if(fireDown)
         //{
         //    Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
@@ -228,7 +228,7 @@ public class Player : MonoBehaviour
         if (canMove == false)
             return;
         
-        //Axis°ªÀ» Á¤¼ö·Î ¹İÈ¯ÇÏ´Â ÇÔ¼ö
+        //Axisê°’ì„ ì •ìˆ˜ë¡œ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
 
@@ -249,7 +249,7 @@ public class Player : MonoBehaviour
         prevMoveVec = moveVec;
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
         moveVec = Camera.main.transform.TransformDirection(moveVec);
-        //ÇÑ ¹æÇâÀ¸·Î ÀÌµ¿ÇÏ¸é ´Ş¸®±â ¸ğµå
+        //í•œ ë°©í–¥ìœ¼ë¡œ ì´ë™í•˜ë©´ ë‹¬ë¦¬ê¸° ëª¨ë“œ
         if (prevMoveVec != Vector3.zero && isDodge == false && prevMoveVec == moveVec)
         {
             curTime += Time.deltaTime; ;
@@ -270,7 +270,7 @@ public class Player : MonoBehaviour
         if(isBorder == false)
             transform.position += moveVec * speed * (isRun ? 2f : 1.0f) * Time.deltaTime; ;
 
-        //¹æÇâÅ° ´©¸£¸é °ÉÀ½
+        //ë°©í–¥í‚¤ ëˆ„ë¥´ë©´ ê±¸ìŒ
         animator.SetBool("isWalk", moveVec != Vector3.zero);;
     }
 
@@ -336,11 +336,11 @@ public class Player : MonoBehaviour
             animator.SetTrigger("doDodge");
             isDodge = true;
 
-            //ÇÇÇÏ´Â µµÁß¿£ ¹æÇâÀ» ÀüÈ¯ÇÏÁö ¸øÇÔ
-            //DodgeOut¿¡¼­ true·Î ¹Ù²ãÁÜ
+            //í”¼í•˜ëŠ” ë„ì¤‘ì—” ë°©í–¥ì„ ì „í™˜í•˜ì§€ ëª»í•¨
+            //DodgeOutì—ì„œ trueë¡œ ë°”ê¿”ì¤Œ
             canMove = false;
 
-            //½Ã°£Â÷ ÇÔ¼ö È£Ãâ
+            //ì‹œê°„ì°¨ í•¨ìˆ˜ í˜¸ì¶œ
             Invoke("DodgeOut", 0.6f);
         }
     }
@@ -358,7 +358,7 @@ public class Player : MonoBehaviour
     }
     void Interaction()
     {
-        //Á¡ÇÁ³ª ±¸¸£±âÇÒ ¶© »óÈ£ÀÛ¿ëX
+        //ì í”„ë‚˜ êµ¬ë¥´ê¸°í•  ë• ìƒí˜¸ì‘ìš©X
         if(interactDown && isDodge == false) 
         {
             if(nearObject != null)
@@ -404,7 +404,7 @@ public class Player : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        //ÅÂ±×¸¦ È°¿ëÇØ ¹Ù´Ú¿¡¸¸ ÀÛµ¿ÇÏµµ·Ï
+        //íƒœê·¸ë¥¼ í™œìš©í•´ ë°”ë‹¥ì—ë§Œ ì‘ë™í•˜ë„ë¡
         if (collision.gameObject.tag == "Floor")
         {
             isJump = false;
