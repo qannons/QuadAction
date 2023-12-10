@@ -162,6 +162,10 @@ public class Player : MonoBehaviour
         {
             gameManager.FloatMoveSceneTxt();
         }
+        else if(cursorObject.CompareTag("Book"))
+        {
+            gameManager.FloatMoveSceneTxt();
+        }
     }
 
     //void Grenade()

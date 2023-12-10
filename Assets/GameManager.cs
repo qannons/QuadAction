@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SceneManager.LoadScene("FarmScene");
+        SceneManager.LoadScene("shop");
         //enemyList = new List<int>();
         //maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
@@ -85,15 +85,15 @@ public class GameManager : MonoBehaviour
         //else
         //    playerAmmoTxt.text = player.equipWeapon.curAmmo + " / " + player.ammo;
 
-        //¹«±â UI
-        //¹«±â´Â ¸ðµÎ µé°í ½ÃÀÛÇÒ²¨¶ó¼­ ºñÈ°¼ºÈ­ÇßÀ½
+        //ï¿½ï¿½ï¿½ï¿½ UI
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½
         //for(int i = 0; i < weaponImg.Length; i++)
         //    weaponImg[i].color = new Color(1, 1, 1, player.hasWeapons[i] ? 1 : 0);
 
 
 
           
-        //º¸½º UI
+        //ï¿½ï¿½ï¿½ï¿½ UI
         //if(boss != null)
         //{
         //    bossHPGroup.anchoredPosition = Vector3.down * 30;
