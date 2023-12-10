@@ -10,11 +10,13 @@ public class Page : MonoBehaviour
 
     private void Start()
     {
+        leftButton = GetComponent<Button>();
+        rightButton = GetComponent<Button>();
         leftButton.onClick.AddListener(OnClickLeftButton);
         rightButton.onClick.AddListener(OnClickRightButton);
     }
 
-    private void OnClickLeftButton()
+    public void OnClickLeftButton()
     {
         if(index > 0)
         {
@@ -23,7 +25,7 @@ public class Page : MonoBehaviour
         }
     }
 
-    private void OnClickRightButton()
+    public void OnClickRightButton()
     {
         if(index < imageArray.Length - 1)
         {
