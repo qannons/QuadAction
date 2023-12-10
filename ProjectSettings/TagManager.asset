@@ -15,6 +15,7 @@ TagManager:
   - Rule Tile
   - Portal
   - MoveScene
+  - Book
   layers:
   - Default
   - TransparentFX
