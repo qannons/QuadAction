@@ -44,14 +44,6 @@ public class GameManager : MonoBehaviour
     public Image[] weaponImg;
     public Image grenadeImg;
 
-    public TMP_Text[] enemyText;
-
-    public TMP_Text curScoreText;
-    public TMP_Text bestScoreText;
-
-    public RectTransform bossHPGroup;
-    public RectTransform bossHPBar;
-
     // Start is called before the first frame update
     private void Awake()
     {
@@ -192,14 +184,9 @@ public class GameManager : MonoBehaviour
         overPanel.SetActive(true);
         gamePanel.SetActive(false);
 
-        curScoreText.text = scoreTxt.text;
 
-        int maxScore = PlayerPrefs.GetInt("MaxScore");
-        if (player.score > maxScore)
-         {
-            bestScoreText.gameObject.SetActive(true);
-            PlayerPrefs.SetInt("MaxScore", player.score);
-        }  
+
+      
     }
 
     public void Restart()
