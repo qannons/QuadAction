@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SceneManager.LoadScene("shop");
+        SceneManager.LoadScene("NaeBu1");
         //enemyList = new List<int>();
         //maxScoretTxt.text = string.Format("{0:n0}", PlayerPrefs.GetInt("MaxScore"));
 
@@ -216,23 +216,23 @@ public class GameManager : MonoBehaviour
         BookTxt.SetActive(false);
     }
     
-    public void FloataccountStoryPanel()
+    public void FloatAccountStoryPanel()
     {
         player.canMove = false;
         accountbookPanel.SetActive(true);
     }
-    public void CloseaccountStoryPanel()
+    public void CloseAccountStoryPanel()
     {
         player.canMove = true;
         accountbookPanel.SetActive(false);
     }
     
-    public void FloatdiaryStoryPanel()
+    public void FloatDiaryStoryPanel()
     {
         player.canMove = false;
         diaryPanel.SetActive(true);
     }
-    public void ClosediaryStoryPanel()
+    public void CloseDiaryStoryPanel()
     {
         player.canMove = true;
         diaryPanel.SetActive(false);

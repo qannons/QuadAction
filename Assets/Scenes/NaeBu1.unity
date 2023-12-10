@@ -1149,15 +1149,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 20.24
+      value: -20.72
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.19
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.38
+      value: 44.43
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6565,9 +6565,49 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1061396287}
     m_Modifications:
+    - target: {fileID: 1000010092448470, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010247695670, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010396403750, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
     - target: {fileID: 1000010719739470, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
       propertyPath: m_Name
       value: PFB_TVStand
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010719739470, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010748514882, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011057010452, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011711900710, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011828946240, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013652651702, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013867835830, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_TagString
+      value: Book2
       objectReference: {fileID: 0}
     - target: {fileID: 4000011810544638, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6607,6 +6647,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011810544638, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65000010569510288, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_Size.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 65000010569510288, guid: 2c955ce5cc6b1a542900b51ed266259c, type: 3}
+      propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

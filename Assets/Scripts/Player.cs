@@ -140,7 +140,7 @@ public class Player : MonoBehaviour
             {
                 // 부딪힌 물체에 대한 처리를 수행
                 cursorObject = hitInfo.collider.gameObject;
-                //Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
+                Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
                 fn();
                 // 여기에 추가적인 처리를 추가할 수 있습니다.
             }
@@ -159,6 +159,10 @@ public class Player : MonoBehaviour
             gameManager.FloatMoveSceneTxt();
         }
         else if(cursorObject.CompareTag("Book"))
+        {
+            gameManager.FloatBookTxt();
+        }
+        else if (cursorObject.CompareTag("Book2"))
         {
             gameManager.FloatBookTxt();
         }
@@ -372,11 +376,11 @@ public class Player : MonoBehaviour
             }
             else if (cursorObject.tag == "Book")
             {
-                gameManager.CloseaccountStoryPanel();
+                gameManager.FloatAccountStoryPanel();
             }
             else if (cursorObject.tag == "Book2")
             {
-                gameManager.ClosediaryStoryPanel();
+                gameManager.FloatDiaryStoryPanel();
             }
         }
     }
