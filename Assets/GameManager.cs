@@ -229,10 +229,12 @@ public class GameManager : MonoBehaviour
     
     public void FloatStoryPanel()
     {
+        player.canMove = false;
         storyPanel.SetActive(true);
     }
     public void CloseStoryPanel()
     {
+        player.canMove = false;
         storyPanel.SetActive(false);
     }
 }
