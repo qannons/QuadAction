@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     float hAxis;
     float vAxis;
 
-    bool canMove = true;
+    public bool canMove = true;
     bool isRun;
     bool isJump;
     bool isDodge;

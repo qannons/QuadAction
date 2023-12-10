@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class FPS_Cam : MonoBehaviour
 {
-    public float sensitivity = 500f; //°¨µµ ¼³Á¤
+    public float sensitivity = 500f; //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public GameObject owner;
-    float rotationX = 0.0f;  //xÃà È¸Àü°ª
-    float rotationY = 0.0f;  //zÃà È¸Àü°ª
+    float rotationX = 0.0f;  //xï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½
+    float rotationY = 0.0f;  //zï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½
 
+    private Player player;
+    
     void Update()
     {
         MouseSencer();
     }
     void MouseSencer()
     {
+        if (player.canMove == false)
+            return;
+        
         float x = Input.GetAxis("Mouse X");
         float y = Input.GetAxis("Mouse Y");
         rotationX += x * sensitivity * Time.deltaTime;
