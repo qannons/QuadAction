@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject gamePanel;
     public GameObject overPanel;
+    public GameObject storyPanel;
+
+
+
+
     public TMP_Text maxScoretTxt;
     public TMP_Text scoreTxt;
     public TMP_Text stageTxt;
@@ -220,5 +225,14 @@ public class GameManager : MonoBehaviour
     public void CloseBookTxt()
     {
         BookTxt.SetActive(false);
+    }
+    
+    public void FloatStoryPanel()
+    {
+        storyPanel.SetActive(true);
+    }
+    public void CloseStoryPanel()
+    {
+        storyPanel.SetActive(false);
     }
 }
