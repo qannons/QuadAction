@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject itemShop;
     public GameObject startZone;
     public GameObject MoveSceneTxt;
+    public GameObject BookTxt;
 
     public Transform[] enemyZones;
     public GameObject[] enemies;
@@ -209,5 +210,15 @@ public class GameManager : MonoBehaviour
     public void CloseMoveSceneTxt()
     {
         MoveSceneTxt.SetActive(false);
+    }
+
+    public void FloatBookTxt()
+    {
+        BookTxt.SetActive(false);
+        BookTxt.SetActive(true);
+    }
+    public void CloseBookTxt()
+    {
+        BookTxt.SetActive(false);
     }
 }
