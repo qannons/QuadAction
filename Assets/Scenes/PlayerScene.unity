@@ -3854,7 +3854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1108150692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4489,11 +4489,6 @@ MonoBehaviour:
   playerCoinTxt: {fileID: 0}
   weaponImg: []
   grenadeImg: {fileID: 0}
-  enemyText: []
-  curScoreText: {fileID: 0}
-  bestScoreText: {fileID: 0}
-  bossHPGroup: {fileID: 0}
-  bossHPBar: {fileID: 0}
 --- !u!4 &1350509524
 Transform:
   m_ObjectHideFlags: 0
