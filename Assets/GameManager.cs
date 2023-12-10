@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,7 +29,8 @@ public class GameManager : MonoBehaviour
     public GameObject menuPanel;
     public GameObject gamePanel;
     public GameObject overPanel;
-    public GameObject storyPanel;
+    public GameObject accountbookPanel;
+    public GameObject diaryPanel;
 
 
 
@@ -214,14 +216,25 @@ public class GameManager : MonoBehaviour
         BookTxt.SetActive(false);
     }
     
-    public void FloatStoryPanel()
+    public void FloataccountStoryPanel()
     {
         player.canMove = false;
-        storyPanel.SetActive(true);
+        accountbookPanel.SetActive(true);
     }
-    public void CloseStoryPanel()
+    public void CloseaccountStoryPanel()
     {
         player.canMove = true;
-        storyPanel.SetActive(false);
+        accountbookPanel.SetActive(false);
+    }
+    
+    public void FloatdiaryStoryPanel()
+    {
+        player.canMove = false;
+        diaryPanel.SetActive(true);
+    }
+    public void ClosediaryStoryPanel()
+    {
+        player.canMove = true;
+        diaryPanel.SetActive(false);
     }
 }

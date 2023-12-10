@@ -372,7 +372,11 @@ public class Player : MonoBehaviour
             }
             else if (cursorObject.tag == "Book")
             {
-                gameManager.FloatStoryPanel();
+                gameManager.CloseaccountStoryPanel();
+            }
+            else if (cursorObject.tag == "Book2")
+            {
+                gameManager.ClosediaryStoryPanel();
             }
         }
     }

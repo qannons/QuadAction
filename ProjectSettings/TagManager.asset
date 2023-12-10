@@ -16,6 +16,7 @@ TagManager:
   - Portal
   - MoveScene
   - Book
+  - Book2
   layers:
   - Default
   - TransparentFX
