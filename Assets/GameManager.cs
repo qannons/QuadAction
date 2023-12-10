@@ -221,7 +221,7 @@ public class GameManager : MonoBehaviour
     }
     public void CloseStoryPanel()
     {
-        player.canMove = false;
+        player.canMove = true;
         storyPanel.SetActive(false);
     }
 }
