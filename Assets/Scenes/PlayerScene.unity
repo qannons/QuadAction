@@ -5205,6 +5205,7 @@ MonoBehaviour:
   menuPanel: {fileID: 0}
   gamePanel: {fileID: 0}
   overPanel: {fileID: 0}
+  storyPanel: {fileID: 0}
   maxScoretTxt: {fileID: 0}
   scoreTxt: {fileID: 0}
   stageTxt: {fileID: 0}
@@ -7563,6 +7564,14 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 2.12
       objectReference: {fileID: 0}
+    - target: {fileID: 368979931465044681, guid: 26712fab92847d9488b63c94582475dc, type: 3}
+      propertyPath: owner
+      value: 
+      objectReference: {fileID: 1703764610}
+    - target: {fileID: 368979931465044681, guid: 26712fab92847d9488b63c94582475dc, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1703764610}
     - target: {fileID: 368979931465044681, guid: 26712fab92847d9488b63c94582475dc, type: 3}
       propertyPath: sensitivity
       value: 2500

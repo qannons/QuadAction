@@ -5,11 +5,11 @@ using UnityEngine;
 public class FPS_Cam : MonoBehaviour
 {
     public float sensitivity = 500f; //���� ����
-    public GameObject owner;
+    public Player player;
     float rotationX = 0.0f;  //x�� ȸ����
     float rotationY = 0.0f;  //z�� ȸ����
 
-    private Player player;
+    //private Player player;
     
     void Update()
     {
@@ -34,6 +34,6 @@ public class FPS_Cam : MonoBehaviour
             rotationY = -30;
         }
         transform.eulerAngles = new Vector3(-rotationY, rotationX, 0.0f);
-        owner.transform.eulerAngles = transform.eulerAngles;
+        player.transform.eulerAngles = transform.eulerAngles;
     }
 }
