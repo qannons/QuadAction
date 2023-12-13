@@ -10,23 +10,14 @@ public class Player : MonoBehaviour
     GameObject cursorObject;
     //무기관련 배열 함수 2개 선언
     //플레이어가 어떤 무기를 갖고있는지
-    public  Weapon[] weapons;
-    public bool[] hasWeapons;
-    public GameObject[] grenades;
-    public GameObject grenadeObj;
-    public int ammo;
+   
     public int health = 100;
-    public int numGrenades = 0;
     public int coin = 0;
     public int score;
     Camera playerCamera;
     public GameManager gameManager;
     public float speed;
-    //public Camera followCamera;
-    public static int maxAmmo = 200;
-    public  int maxHP = 100;
-    static int maxGrenade = 4;
-    public Weapon equipWeapon = null;
+
 
     //Input Axsis 값을 받을 전역 변수 선언
     float hAxis;
@@ -36,24 +27,14 @@ public class Player : MonoBehaviour
     bool isRun;
     bool isJump;
     bool isDodge;
-    bool isSwap;
-    bool isReload;
-    bool isFireReady;
-    bool isImmune = false;
+   
     bool isBorder;
     bool isShopping = false;
     bool isDead = false;
 
     bool jumpDown;
     bool interactDown;
-    bool swapDown1;
-    bool swapDown2;
-    bool swapDown3;
-    bool fireDown;
-    bool reloadDown;
 
-
-    float fireDelay;
 
     float curTime = 0;
     Vector3 prevMoveVec;
@@ -66,7 +47,6 @@ public class Player : MonoBehaviour
 
     //트리거된 아이템을 저장하기 위한 변수 선언
     GameObject nearObject;
-    GameObject mapName;
 
     public RaycastHit hit;
 
@@ -172,12 +152,7 @@ public class Player : MonoBehaviour
         jumpDown = Input.GetButtonDown("Jump");
         interactDown = Input.GetButtonDown("Interaction");
 
-        swapDown1 = Input.GetButtonDown("Swap1");
-        swapDown2 = Input.GetButtonDown("Swap2");
-        swapDown3 = Input.GetButtonDown("Swap3");
 
-        fireDown = Input.GetMouseButton(0);
-        reloadDown = Input.GetButtonDown("Reload");
     }
     
     void MoveUpdate()
@@ -256,22 +231,6 @@ public class Player : MonoBehaviour
         //점프나 구르기할 땐 상호작용X
         if(interactDown && isDodge == false) 
         {
-            if(nearObject != null)
-            {
-                if(nearObject.tag == "Weapon")
-                {
-                    Item item = nearObject.GetComponent<Item>();
-                    int weaponIndex = item.id;
-                    hasWeapons[weaponIndex] = true;     
-                    Destroy(nearObject);
-                }
-                else if(nearObject.tag =="Shop")
-                {
-                    Shop shop = nearObject.GetComponent<Shop>();
-                    shop.Enter(this);
-                    isShopping = true;
-                }
-            }
             if(cursorObject.name == "Home2Shop")
             {
                 SceneManager.LoadScene("shop");
@@ -317,38 +276,13 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag =="Item")
-        {
-            Item item = other.GetComponent<Item>();
-            switch(item.type)
-            {
-                case Item.Type.Ammo:
-                    ammo += item.quantity;
-                    if(ammo > maxAmmo)
-                        ammo = maxAmmo;
-                    break;
-
-                case Item.Type.Heart:
-                    health += item.quantity;
-                    if(health > maxHP)
-                        health = maxHP;
-                    break;
-
-                case Item.Type.Grenade:
-                    if (numGrenades >= maxGrenade)
-                        return;
-                    grenades[numGrenades].SetActive(true);
-                    numGrenades += item.quantity;
-                    break;
-            }
-            Destroy(other.gameObject);
-        }
+        
         
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Shop" || other.tag == "MoveScene")
+        if(other.tag == "MoveScene")
         {
             nearObject = other.gameObject;
         }
@@ -367,12 +301,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Shop")
-        {
-                Shop shop = nearObject.GetComponent<Shop>();
-                shop.Exit();
-                isShopping = false;
-        }
+
         nearObject = null;
 
         if (other.tag == "MoveScene")

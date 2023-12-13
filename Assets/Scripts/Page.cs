@@ -6,7 +6,7 @@ public class Page : MonoBehaviour
     public Button leftButton;
     public Button rightButton;
     public Sprite[] imageArray;
-    private int index;
+    private int index = 0;
 
     private void Start()
     {
