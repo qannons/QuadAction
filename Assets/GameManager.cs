@@ -14,10 +14,11 @@ public class GameManager : MonoBehaviour
     public GameObject MoveSceneTxt;
     public GameObject BookTxt;
 
-    public GameObject accountbookPanel;
-    public GameObject accountbookPanel2;
+    public GameObject accountBookPanel;
+    public GameObject accountBookPanel2;
     public GameObject medicalBookPanel;
     public GameObject diaryPanel;
+    public GameObject noteBookPanel;
 
     // Start is called before the first frame update
     private void Awake()
@@ -27,8 +28,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SceneManager.LoadScene("shop");
-        //SceneManager.LoadScene("NaeBu1");
+        //SceneManager.LoadScene("shop");
+        SceneManager.LoadScene("NaeBu1");
     }
 
 
@@ -55,22 +56,22 @@ public class GameManager : MonoBehaviour
     public void FloatAccountStoryPanel()
     {
         player.canMove = false;
-        accountbookPanel.SetActive(true);
+        accountBookPanel.SetActive(true);
     }
     public void CloseAccountStoryPanel()
     {
         player.canMove = true;
-        accountbookPanel.SetActive(false);
+        accountBookPanel.SetActive(false);
     }
     public void FloatAccountStoryPanel2()
     {
         player.canMove = false;
-        accountbookPanel2.SetActive(true);
+        accountBookPanel2.SetActive(true);
     }
     public void CloseAccountStoryPanel2()
     {
         player.canMove = true;
-        accountbookPanel2.SetActive(false);
+        accountBookPanel2.SetActive(false);
     }
     
     public void FloatDiaryStoryPanel()
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
         player.canMove = true;
         diaryPanel.SetActive(false);
     }
+
     public void FloatMedicalBookPanel()
     {
         player.canMove = false;
@@ -92,5 +94,16 @@ public class GameManager : MonoBehaviour
     {
         player.canMove = true;
         medicalBookPanel.SetActive(false);
+    }
+
+    public void FloatNoteBookPanel()
+    {
+        player.canMove = false;
+        noteBookPanel.SetActive(true);
+    }
+    public void CloseNoteBookPanel()
+    {
+        player.canMove = true;
+        noteBookPanel.SetActive(false);
     }
 }

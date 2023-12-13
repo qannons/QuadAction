@@ -19,6 +19,7 @@ TagManager:
   - Book2
   - Book1123
   - BookMedical
+  - BookNote
   layers:
   - Default
   - TransparentFX

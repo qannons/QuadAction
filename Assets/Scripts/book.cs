@@ -3,8 +3,8 @@ using UnityEngine;
 public class book : MonoBehaviour
 {
     public Light pulsatingLight;
-    public float maxIntensity = 0.4f;
-    public float pulseSpeed = 0.5f; // 주기를 조절하는 값
+    public float maxIntensity;
+    public float pulseSpeed; // 주기를 조절하는 값
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class book : MonoBehaviour
             pulsatingLight.intensity = 0f;
 
             // InvokeRepeating에서 주기를 조절합니다.
-            InvokeRepeating("ToggleLight", 0f, 1f / pulseSpeed);
+            InvokeRepeating("ToggleLight", 0f, 1f / 2);
         }
         else
         {
