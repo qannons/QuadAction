@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
    
     bool isBorder;
     bool isShopping = false;
-    bool isDead = false;
 
     bool jumpDown;
     bool interactDown;
@@ -68,7 +67,6 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) return;
         InputUpdate();
 
         MoveUpdate();
@@ -157,6 +155,8 @@ public class Player : MonoBehaviour
     
     void MoveUpdate()
     {
+        if (canMove == false)
+            return;
         prevMoveVec = moveVec;
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
         moveVec = Camera.main.transform.TransformDirection(moveVec);

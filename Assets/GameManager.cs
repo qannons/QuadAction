@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
     public GameObject medicalBookPanel;
     public GameObject diaryPanel;
     public GameObject noteBookPanel;
-
+    public GameObject endScenePanel;
+    
+    public TextMeshProUGUI endSceneTxt;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -105,5 +107,15 @@ public class GameManager : MonoBehaviour
     {
         player.canMove = true;
         noteBookPanel.SetActive(false);
+    }
+    public void FloatEndScenePanel()
+    {
+        player.canMove = false;
+        endScenePanel.SetActive(true);
+    }
+    public void FloatEndSceneTxt()
+    {
+        //player.canMove = false;
+        endSceneTxt.gameObject.SetActive(true);
     }
 }
