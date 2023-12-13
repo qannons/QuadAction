@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
         {
             gameManager.FloatMoveSceneTxt();
         }
-        else if(cursorObject.CompareTag("Book") || cursorObject.CompareTag("Book1123") || cursorObject.CompareTag("Book2") || cursorObject.CompareTag("BookMedical"))
+        else if(cursorObject.CompareTag("Book") || cursorObject.CompareTag("Book1123") || cursorObject.CompareTag("Book2") || cursorObject.CompareTag("BookMedical") || cursorObject.CompareTag("BookNote"))
         {
             gameManager.FloatBookTxt();
         }
@@ -258,6 +258,10 @@ public class Player : MonoBehaviour
             else if (cursorObject.tag == "BookMedical")
             {
                 gameManager.FloatMedicalBookPanel();
+            }
+            else if (cursorObject.tag == "BookNote")
+            {
+                gameManager.FloatNoteBookPanel();
             }
         }
     }
