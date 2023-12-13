@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //SceneManager.LoadScene("shop");
-        SceneManager.LoadScene("NaeBu1");
+        SceneManager.LoadScene("VillageScene");
     }
 
 

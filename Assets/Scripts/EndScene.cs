@@ -1,44 +1,50 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EndScene : MonoBehaviour
 {
-    public float delay = 2f;
-    public float fadeTime = 2f;
+    private Player player;
     
+    private float delay = 2f;
+    private float fadeTime = 2f;
+
+    private float time;
+    
+
+    private void Update()
+    {
+        time += Time.deltaTime;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
+        //player.canMove = false;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(Load());
+            GameObject endObj = GameObject.Find("EndScene");
+            Image image = endObj.GetComponentInChildren<Image>();
+            Color color = image.color;
+            
+            if (image.color.a < 1f) // 투명도가 1보다 작을 때
+            {
+                color.a = 0.2f * time;
+                image.color = color;
+            }
+            else
+            {
+                TextMeshProUGUI endText = endObj.GetComponentInChildren<TextMeshProUGUI>();
+                endText.gameObject.SetActive(true);
+            }
         }
+        
     }
     
-    IEnumerator Load()
-    {
-        yield return new WaitForSeconds(delay);
-
-        // 이미지 불러오기
-        Image image = GetComponent<Image>();
-        RectTransform rectTransform = image.rectTransform;
-        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Screen.width);
-        rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, Screen.height);
-        image.color = Color.clear;
-
-        // Fade In 효과
-        float startTime = Time.time;
-        while (Time.time - startTime <= fadeTime)
-        {
-            image.color = Color.Lerp(Color.clear, Color.black, (Time.time - startTime) / fadeTime);
-            yield return null;
-        }
-        image.color = Color.black;
-        
-        yield return new WaitForSeconds(delay);
-
-    }
 }
