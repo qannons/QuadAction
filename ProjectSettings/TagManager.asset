@@ -17,6 +17,8 @@ TagManager:
   - MoveScene
   - Book
   - Book2
+  - Book1123
+  - BookMedical
   layers:
   - Default
   - TransparentFX

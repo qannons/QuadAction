@@ -96,13 +96,9 @@ public class Player : MonoBehaviour
 
         if(isShopping == false)
         {
-            Attack();
-            
             Jump();
             Dodge();
             Interaction();
-            SwapWeapon();
-            Reload();
         }
     }
 
@@ -140,7 +136,7 @@ public class Player : MonoBehaviour
             {
                 // 부딪힌 물체에 대한 처리를 수행
                 cursorObject = hitInfo.collider.gameObject;
-                Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
+                //Debug.Log("Hit object: " + cursorObject.name + ", Distance: " + distanceToHit);
                 fn();
                 // 여기에 추가적인 처리를 추가할 수 있습니다.
             }
@@ -158,55 +154,10 @@ public class Player : MonoBehaviour
         {
             gameManager.FloatMoveSceneTxt();
         }
-        else if(cursorObject.CompareTag("Book"))
+        else if(cursorObject.CompareTag("Book") || cursorObject.CompareTag("Book1123") || cursorObject.CompareTag("Book2"))
         {
             gameManager.FloatBookTxt();
         }
-        else if (cursorObject.CompareTag("Book2"))
-        {
-            gameManager.FloatBookTxt();
-        }
-    }
-
-    //void Grenade()
-    //{
-    //    if (grenadeDown == false)
-    //        return;
-
-    //    if (numGrenades == 0)
-    //        return;
-
-    //    Ray ray = followCamera.ScreenPointToRay(Input.mousePosition);
-    //    RaycastHit rayHit;
-    //    if (Physics.Raycast(ray, out rayHit, 100))
-    //    {
-    //        Vector3 nextVec = rayHit.point - transform.position;
-    //        nextVec.y = 3f;
-
-    //        GameObject instantGrenade = Instantiate(grenadeObj, transform.position+Vector3.forward, transform.rotation);
-    //        Rigidbody rbGrenade = instantGrenade.GetComponent<Rigidbody>();
-    //        rbGrenade.AddForce(nextVec*2, ForceMode.Impulse);
-    //        rbGrenade.AddTorque(Vector3.back*10, ForceMode.Impulse);
-    //    }
-
-    //    numGrenades--;
-    //    grenades[numGrenades].SetActive(false);
-    //}
-
-    void Reload()
-    {
-        if (reloadDown == false)
-            return;
-
-        if (equipWeapon == null || equipWeapon.type == Weapon.Type.Melee)
-            return;
-
-        if (ammo == 0 || isJump || isSwap || isDodge || isReload || isFireReady == false)
-            return;
-
-        animator.SetTrigger("doReload");
-        isReload = true;
-        Invoke("ReloadOut", 2f);
     }
 
     void InputUpdate()
@@ -257,47 +208,6 @@ public class Player : MonoBehaviour
 
         //방향키 누르면 걸음
         animator.SetBool("isWalk", moveVec != Vector3.zero);;
-    }
-
-    void Attack()
-    {
-        if (equipWeapon == null)
-            return;
-
-        fireDelay += Time.deltaTime;
-        isFireReady = (equipWeapon.rate < fireDelay);
-
-        if (isFireReady && fireDown && isDodge == false && isSwap == false)
-        {
-            equipWeapon.Use();
-            animator.SetTrigger(equipWeapon.type == Weapon.Type.Melee ? "doSwing" : "doShot");
-            fireDelay = 0;
-        }
-    }
-
-    void SwapWeapon()
-    {
-        int weaponIndex = -1;
-
-         if (swapDown1 && hasWeapons[0])
-            weaponIndex = 0;
-        else if (swapDown2 && hasWeapons[1])
-            weaponIndex = 1;
-        else if (swapDown3 && hasWeapons[2])
-            weaponIndex = 2;
-        else
-            return;
-
-        if (equipWeapon == weapons[weaponIndex])
-            return;
-
-        if(equipWeapon != null)
-            equipWeapon.gameObject.SetActive(false);
-
-        equipWeapon = weapons[weaponIndex];
-        equipWeapon.gameObject.SetActive(true);
-
-        animator.SetTrigger("doSwap");
     }
 
     void Jump()
@@ -377,6 +287,10 @@ public class Player : MonoBehaviour
             else if (cursorObject.tag == "Book")
             {
                 gameManager.FloatAccountStoryPanel();
+            }
+            else if (cursorObject.tag == "Book1123")
+            {
+                gameManager.FloatAccountStoryPanel2();
             }
             else if (cursorObject.tag == "Book2")
             {
