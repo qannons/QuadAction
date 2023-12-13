@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject accountbookPanel;
     public GameObject accountbookPanel2;
+    public GameObject medicalBookPanel;
     public GameObject diaryPanel;
 
     // Start is called before the first frame update
@@ -81,5 +82,15 @@ public class GameManager : MonoBehaviour
     {
         player.canMove = true;
         diaryPanel.SetActive(false);
+    }
+    public void FloatMedicalBookPanel()
+    {
+        player.canMove = false;
+        medicalBookPanel.SetActive(true);
+    }
+    public void CloseMedicalBookPanel()
+    {
+        player.canMove = true;
+        medicalBookPanel.SetActive(false);
     }
 }
