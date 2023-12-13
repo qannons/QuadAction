@@ -30,6 +30,7 @@ public class EndScene : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             GameObject endObj = GameObject.Find("EndScene");
+            endObj.SetActive(true);
             Image image = endObj.GetComponentInChildren<Image>();
             Color color = image.color;
             
