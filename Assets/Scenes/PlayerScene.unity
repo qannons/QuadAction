@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1273174, g: 0.13414761, b: 0.12107885, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1674,7 +1674,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &466787440
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1714,11 +1714,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'End
-
-    End
-
-    End'
+  m_text: "\uB9C8\uC744\uC744 \uB3CC\uC544\uB2E4\uB2C8\uB358 \uC911 \uD55C \uC0AC\uB78C\uC774
+    \uB9C8\uC744\uC5D0 \uB4E4\uC5B4\uC654\uB2E4  \uADFC\uCC98 \uC2DC\uB0B4\uB85C
+    \uB370\uB824\uB2E4\uC900\uB2E4\uACE0 \uD558\uC5EC \uCC28\uB97C \uC5BB\uC5B4\uD0C0\uAC8C
+    \uB418\uC5C8\uB2E4 \uACE0\uB9C8\uC6B4 \uB9C8\uC74C\uC5D0 \uC774\uB984\uC744 \uBB3C\uC5B4\uBCF4\uC558\uB2E4
+    \"\uC81C \uC774\uB984\uC774\uC694?\" \"\uB85C\uC774\uB4DC\uC785\uB2C8\uB2E4\""
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
