@@ -30,8 +30,9 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        SceneManager.LoadScene("shop");
+        //SceneManager.LoadScene("shop");
         //SceneManager.LoadScene("VillageScene");
+        SceneManager.LoadScene("FarmScene");
     }
 
 

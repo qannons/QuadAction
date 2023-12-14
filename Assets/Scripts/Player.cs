@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public bool canMove = true;
     bool isRun;
     bool isJump;
-    bool isDodge;
+    
    
     bool isBorder;
     bool isShopping = false;
@@ -75,7 +75,6 @@ public class Player : MonoBehaviour
         if(isShopping == false)
         {
             Jump();
-            Dodge();
             Interaction();
         }
     }
@@ -161,7 +160,7 @@ public class Player : MonoBehaviour
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
         moveVec = Camera.main.transform.TransformDirection(moveVec);
         //한 방향으로 이동하면 달리기 모드
-        if (prevMoveVec != Vector3.zero && isDodge == false && prevMoveVec == moveVec)
+        if (prevMoveVec != Vector3.zero && prevMoveVec == moveVec)
         {
             curTime += Time.deltaTime; ;
             if (curTime > 0.5f) 
@@ -198,30 +197,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Dodge()
-    {
-        if (jumpDown && moveVec != Vector3.zero && isDodge == false)
-        {
-            speed *= 2;
-            animator.SetTrigger("doDodge");
-            isDodge = true;
-
-            //피하는 도중엔 방향을 전환하지 못함
-            //DodgeOut에서 true로 바꿔줌
-            canMove = false;
-
-            //시간차 함수 호출
-            Invoke("DodgeOut", 0.6f);
-        }
-    }
-
-    void DodgeOut()
-    {
-        speed *= 0.5f;
-        isDodge = false;
-        canMove = true;
-    }
-
     void FreezeRotation()
     {
         rb.angularVelocity = Vector3.zero;
@@ -229,7 +204,7 @@ public class Player : MonoBehaviour
     void Interaction()
     {
         //점프나 구르기할 땐 상호작용X
-        if(interactDown && isDodge == false) 
+        if(interactDown) 
         {
             if(cursorObject.name == "Home2Shop")
             {
@@ -243,6 +218,12 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("NaeBu1");
             }
+            else if (cursorObject.name == "Naebu2Villege")
+            {
+                SceneManager.LoadScene("VillageScene");
+            }
+
+
             else if (cursorObject.tag == "Book")
             {
                 gameManager.FloatAccountStoryPanel();
